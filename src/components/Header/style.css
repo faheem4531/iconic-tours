@@ -1,0 +1,29 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0px 20px;
+}
+.header-title {
+  color: var(--dark-black-color);
+  font-family: var(--main-font);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 44px;
+}
+.header-sub-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  font-family: var(--main-font);
+  color: var(--gray-color);
+}
+.dropdown-icon-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  cursor: pointer;
+}

@@ -1,0 +1,5 @@
+.category-modal-btn--wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}

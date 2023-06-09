@@ -1,0 +1,49 @@
+.line-chart-container {
+  border: 1px solid var(--light-sky-color);
+  padding: 14px 0px;
+  border-radius: 20px;
+  width: 100% !important;
+  margin-top: 40px;
+}
+.line-chart {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  align-self: center;
+  justify-content: center;
+}
+.sales-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 15px;
+}
+.sales-over-year {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: var(--black-colors);
+  font-family: var(--main-font);
+}
+.orange-dot-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.orange-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50px;
+  background-color: var(--orange-color);
+}
+.sold-ticke {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: right;
+  color: var(--orange-color);
+  font-family: var(--main-font);
+}

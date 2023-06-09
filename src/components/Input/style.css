@@ -1,0 +1,30 @@
+.label {
+  color: var(--light-black-color);
+  font-family: var(--main-font);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 17px;
+}
+.span {
+  color: var(--orange-color);
+  font-size: 18px;
+  margin-left: 2px;
+}
+.input {
+  border: 1px solid var(--light-gray-color);
+  color: var(--light-black-color);
+  font-style: normal;
+  outline: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+.input::placeholder {
+  color: var(--light-gray-color);
+}

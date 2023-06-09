@@ -1,0 +1,57 @@
+.admin-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.admin-bg-img {
+  background-image: url(../assets/pngs/admin-bg.png);
+  width: 90px;
+  height: 90px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 100px;
+}
+.admin-name {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 34px;
+  letter-spacing: 0px;
+  text-align: left;
+  font-family: var(--main-font);
+  color: var(--dark-black-color);
+}
+.admin-mail {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  font-family: var(--main-font);
+  color: var(--dark-black-color);
+}
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-content-wrapper {
+  border: 1px solid var(--light-sky-color);
+  border-radius: 20px;
+  padding: 40px;
+  min-height: 80vh;
+}
+.admin-inputs-wrapper {
+  margin-top: 50px;
+}
+.admin-save-button {
+  margin-left: auto;
+  align-self: flex-end;
+  margin-top: 10rem;
+  width: 170px;
+}

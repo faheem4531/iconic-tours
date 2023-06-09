@@ -1,0 +1,81 @@
+.active-tour-card {
+  border: 1px solid var(--light-sky-color);
+  border-radius: 10px;
+  padding: 25px 20px;
+  min-width: 350px;
+  width: 350px;
+}
+.downtown-tours-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.downtown-bg-wrapper {
+  background-color: var(--light-green-color);
+  padding: 5px;
+  border-radius: 6px;
+  padding: 5px 20px;
+}
+.tour-title {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: var(--white-color);
+}
+.tousr-sub-title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-top: 17px;
+  color: var(--black-color);
+  font-family: var(--main-font);
+}
+.tousr-date-time {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: var(--dark-orange-color);
+  font-family: var(--main-font);
+}
+.category-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 15px;
+}
+.category-name {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: var(--dark-gray-colors);
+  font-family: var(--main-font);
+}
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50px;
+  background-color: var(--dark-gray-colors);
+}
+.total-tickets-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 5px;
+}
+.total-ticket {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: var(--dark-gray-colors);
+  font-family: var(--main-font);
+}

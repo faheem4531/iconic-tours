@@ -1,0 +1,50 @@
+.tours-card {
+  background-color: var(--light-green-color);
+  border-radius: 20px;
+  padding: 15px 20px;
+  width: 100%;
+  min-width: 230px;
+  height: 185px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-name {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13.5513px;
+  line-height: 18px;
+  font-family: var(--main-font);
+  color: var(--extra-light-green);
+}
+.tours-card-title {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 26px;
+  font-family: var(--main-font);
+  color: var(--white-color);
+  margin-top: 3px;
+}
+.arrow-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.arrow-wrapper {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: var(--white-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ticket-num {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13.5513px;
+  line-height: 18px;
+  font-family: var(--main-font);
+  color: var(--extra-light-green);
+}

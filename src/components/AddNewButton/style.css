@@ -1,0 +1,55 @@
+.add-new-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: none;
+  outline: none;
+  background-color: var(--orange-color);
+  border-radius: 10px;
+  height: 38px;
+  width: 120px;
+}
+.add-new-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: right;
+  font-family: var(--main-font);
+  color: var(--white-color);
+}
+.modal-content {
+  border: none !important;
+  outline: none !important;
+  border-radius: 20px !important;
+}
+.modal-body {
+  padding: 25px !important;
+  height: 60vh;
+  min-height: 100%;
+  overflow-y: scroll;
+}
+.modal-body::-webkit-scrollbar {
+  width: 0px;
+}
+.modal-heading {
+  background-color: var(--orange-color);
+  border-radius: 18px 18px 0px 0px;
+  padding: 20px 25px;
+}
+.modal-heading {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0em;
+  text-align: left;
+  font-family: var(--main-font);
+  color: var(--white-color);
+}
+.modal-button-wrapper {
+  width: 50%;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}

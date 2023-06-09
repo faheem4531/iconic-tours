@@ -1,0 +1,27 @@
+.sales-analysis-card {
+  border: 1px solid var(--light-sky-color);
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.revenue-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.total-revenue {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--main-font);
+  color: var(--orange-color);
+}
+.revenue-ammount {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 41px;
+  font-family: var(--main-font);
+  color: var(--light-black-color);
+}
