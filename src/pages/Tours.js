@@ -123,6 +123,11 @@ const upcomingToursCard = [
 ];
 
 const Tours = () => {
+  const onEdit = () => {
+    const btn = document.getElementById("openModalBtn");
+    btn.click();
+  };
+
   return (
     <div>
       <Header title="Tours" />
@@ -320,6 +325,7 @@ const Tours = () => {
       <div className="active-tours-wrap-container">
         {activeToursCard.map((card, index) => (
           <ActiveToursCard
+            onEdit={onEdit}
             key={index}
             title={card.title}
             subTitle={card.subTitle}
@@ -336,6 +342,7 @@ const Tours = () => {
       <div className="active-tours-wrap-container">
         {upcomingToursCard.map((card, index) => (
           <ActiveToursCard
+            onEdit={onEdit}
             key={index}
             title={card.title}
             subTitle={card.subTitle}

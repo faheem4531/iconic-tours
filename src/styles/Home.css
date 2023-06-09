@@ -53,10 +53,12 @@
   text-align: right;
   color: var(--orange-color);
   font-family: var(--main-font);
+  border: none;
+  outline: none;
+  background-color: var(--white-color);
+  text-decoration: underline;
 }
-.view-all-tours:hover {
-  color: var(--orange-color);
-}
+
 .viewl-all-tours-wrapper {
   display: flex;
   align-items: center;

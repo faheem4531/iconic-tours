@@ -13,6 +13,7 @@ import LineChart from "./LineChart";
 import Calander from "./Calander";
 import SelectInput from "./SelectInput";
 import UsersTable from "./UsersTable";
+import ProtectRoute from "./ProtectRoute";
 
 export {
   Sidebar,
@@ -30,4 +31,5 @@ export {
   Calander,
   SelectInput,
   UsersTable,
+  ProtectRoute,
 };

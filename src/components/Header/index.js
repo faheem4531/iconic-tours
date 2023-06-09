@@ -1,9 +1,17 @@
 import React from "react";
 import "./style.css";
+import { Link, useNavigate } from "react-router-dom";
 
 import DropdownIcon from "../../assets/svgs/admin-dropdwon-icon.svg";
 
 const Header = ({ title }) => {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <>
       <div className="header-container">
@@ -21,14 +29,14 @@ const Header = ({ title }) => {
           </div>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
-              <a class="dropdown-item" href="#">
+              <Link class="dropdown-item" to="/admin">
                 Admin
-              </a>
+              </Link>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <button class="dropdown-item" onClick={logout}>
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </div>

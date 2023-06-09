@@ -3,7 +3,7 @@ import "./style.css";
 
 import dotsIcon from "../../assets/svgs/dots-white-icon.svg";
 
-const CategoriesCard = ({ bgColor, title }) => {
+const CategoriesCard = ({ bgColor, title, onEdit }) => {
   return (
     <>
       <div
@@ -20,14 +20,12 @@ const CategoriesCard = ({ bgColor, title }) => {
           </div>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
-              <a class="dropdown-item" href="#">
+              <button class="dropdown-item" onClick={onEdit}>
                 Edit
-              </a>
+              </button>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
-                Delete
-              </a>
+              <button class="dropdown-item">Delete</button>
             </li>
           </ul>
         </div>

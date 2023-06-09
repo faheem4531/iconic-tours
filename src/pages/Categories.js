@@ -29,6 +29,11 @@ const categoriesCards = [
 ];
 
 const Categories = () => {
+  const onEdit = () => {
+    const btn = document.getElementById("openModalBtn");
+    btn.click();
+  };
+
   return (
     <div>
       <Header title="Categories" />
@@ -59,7 +64,12 @@ const Categories = () => {
         </AddNewButton>
       </div>
       {categoriesCards.map((card, index) => (
-        <CategoriesCard key={index} title={card.title} bgColor={card.bgColor} />
+        <CategoriesCard
+          key={index}
+          title={card.title}
+          bgColor={card.bgColor}
+          onEdit={onEdit}
+        />
       ))}
     </div>
   );

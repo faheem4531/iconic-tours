@@ -11,6 +11,7 @@ const ActiveToursCard = ({
   time,
   totalTickets,
   remainingTickets,
+  onEdit,
 }) => {
   return (
     <div className="active-tour-card">
@@ -30,14 +31,12 @@ const ActiveToursCard = ({
           </div>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
-              <a class="dropdown-item" href="#">
+              <button class="dropdown-item" onClick={onEdit}>
                 Edit
-              </a>
+              </button>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
-                Delete
-              </a>
+              <button class="dropdown-item">Delete</button>
             </li>
           </ul>
         </div>

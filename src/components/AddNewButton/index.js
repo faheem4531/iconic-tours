@@ -10,7 +10,8 @@ const AddNewButton = ({ children, title }) => {
       <button
         className="add-new-container"
         data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop">
+        data-bs-target="#staticBackdrop"
+        id="openModalBtn">
         <div className="add-new-title">Add New</div>
         <img src={addNewIcon} alt="icon" />
       </button>
@@ -19,6 +20,7 @@ const AddNewButton = ({ children, title }) => {
         id="staticBackdrop"
         data-bs-keyboard="false"
         tabindex="-1"
+        role="dialog"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

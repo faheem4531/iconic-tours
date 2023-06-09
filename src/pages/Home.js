@@ -7,8 +7,8 @@ import {
   LineChart,
   Calander,
 } from "../components";
-
 import "../styles/Home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -64,9 +64,9 @@ const Home = () => {
                   </label>
                 </div>
               </div>
-              <a href="#" className="view-all-tours">
-                Viewl All
-              </a>
+              <Link to="/tours">
+                <button className="view-all-tours">Viewl All</button>
+              </Link>
             </div>
             <div className="scroll-wrapper">
               <div className="tour-card-wrapper">

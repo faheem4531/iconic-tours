@@ -4,6 +4,8 @@ import "./style.css";
 import menuIcon from "../../assets/svgs/menu-icon.svg";
 import dotsIcon from "../../assets/svgs/donts-icon.svg";
 
+import { Link } from "react-router-dom";
+
 const tableData = [
   {
     num: "#01",
@@ -125,9 +127,9 @@ const UsersTable = () => {
                       class="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1">
                       <li>
-                        <a class="dropdown-item" href="#">
+                        <Link to="/userprofile" class="dropdown-item">
                           User Profile
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
