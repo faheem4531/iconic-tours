@@ -89,3 +89,10 @@ td:last-child {
 .dropdown-item:active {
   background-color: var(--orange-color) !important;
 }
+.loader-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}

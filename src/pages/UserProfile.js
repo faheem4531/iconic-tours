@@ -1,13 +1,10 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import "../styles/UserProfile.css";
 
 import { Button, Header, Input, TicketsCard } from "../components";
 
 const ticketCard = [
-  {
-    title: "Tickets Sold",
-    subTitle: "2.5k",
-  },
   {
     title: "Kids",
     subTitle: "2.9k",
@@ -27,6 +24,7 @@ const ticketCard = [
 ];
 
 const UserProfile = () => {
+  const { state } = useLocation();
   return (
     <div>
       <Header title="Users" />
@@ -37,13 +35,15 @@ const UserProfile = () => {
               {/* <img className="user-profile-img" src={Admin Image} alt="img"/> */}
             </div>
             <div>
-              <div className="user-profile-name">Nicholas Patrik</div>
-              <div className="user-profile-mail">mailtonicholas@gmail.com</div>
+              <div className="user-profile-name">
+                {state.data.user.firstName}
+              </div>
+              <div className="user-profile-mail">{state.data.user.email}</div>
             </div>
           </div>
           <TicketsCard
             title="Total Revenue"
-            subTitle="$25k"
+            subTitle={`$${state.data.revenue.totalRevenue}`}
             textAlign="center"
             bgColor="#F2F8FB"
             color="var(--dark-orange-color)"
@@ -51,6 +51,7 @@ const UserProfile = () => {
           />
         </div>
         <div className="sold-tickets-card-wrapper">
+          <TicketsCard title="Tickets Sold" subTitle="2.5k" />
           {ticketCard.map((card, inedex) => (
             <TicketsCard
               key={inedex}

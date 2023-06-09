@@ -1,14 +1,29 @@
-import React from "react";
-import { AddNewButton, Header, UsersTable, Input } from "../components";
+import React, { useEffect, useState } from "react";
+import { AddNewButton, Header, UsersTable, Input, Loader } from "../components";
+import api from "../Services/Apis";
 import "../styles/Users.css";
 
 const Users = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const getUsers = async () => {
+    setLoading(true);
+    const res = await api.get("/api/v1/revenue/allUser");
+    setLoading(false);
+    setUsers(res.data);
+    setLoading();
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <div>
       <Header title="Users" />
       <div className="users-add-btn-wrapper">
         <div className="sales-representative">
-          Total Sales Representative: (30)
+          Total Sales Representative: {users.length}
         </div>
         <AddNewButton title="Users">
           <Input
@@ -85,7 +100,7 @@ const Users = () => {
           />
         </AddNewButton>
       </div>
-      <UsersTable />
+      <UsersTable users={users} loading={loading} />
     </div>
   );
 };
