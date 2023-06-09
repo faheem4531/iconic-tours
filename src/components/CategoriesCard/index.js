@@ -1,9 +1,22 @@
 import React from "react";
+import { toast } from "react-toastify";
 import "./style.css";
 
 import dotsIcon from "../../assets/svgs/dots-white-icon.svg";
+import api from "../../Services/Apis";
 
-const CategoriesCard = ({ bgColor, title, onEdit }) => {
+const CategoriesCard = ({ bgColor, title, onEdit, id, getCategories }) => {
+  const deleteCategory = async () => {
+    try {
+      await api.delete(`/api/v1/category/${id}`);
+      toast("Category deleted successfully", { type: "success" });
+      getCategories();
+    } catch (error) {
+      toast(error.response.data.message || "Failed to login", {
+        type: "error",
+      });
+    }
+  };
   return (
     <>
       <div
@@ -25,7 +38,9 @@ const CategoriesCard = ({ bgColor, title, onEdit }) => {
               </button>
             </li>
             <li>
-              <button class="dropdown-item">Delete</button>
+              <button class="dropdown-item" onClick={deleteCategory}>
+                Delete
+              </button>
             </li>
           </ul>
         </div>

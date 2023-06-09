@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../Services/Apis";
 import {
   ActiveToursCard,
   AddNewButton,
@@ -127,6 +128,26 @@ const Tours = () => {
     const btn = document.getElementById("openModalBtn");
     btn.click();
   };
+
+  const [tours, setTours] = useState([]);
+  const [activeTours, setActiveTours] = useState([]);
+  const [upComingTours, setUpCommingTours] = useState([]);
+  const getTours = async () => {
+    const res = await api.get("/api/v1/package");
+    setTours(res.data);
+    const activeTours = res.data.filter((tour) => {
+      return tour.upComing === false;
+    });
+    const upComingTours = res.data.filter((tour) => {
+      return tour.upComing === true;
+    });
+    setActiveTours(activeTours);
+    setUpCommingTours(upComingTours);
+  };
+
+  useEffect(() => {
+    getTours();
+  }, []);
 
   return (
     <div>
@@ -323,36 +344,45 @@ const Tours = () => {
         </AddNewButton>
       </div>
       <div className="active-tours-wrap-container">
-        {activeToursCard.map((card, index) => (
-          <ActiveToursCard
-            onEdit={onEdit}
-            key={index}
-            title={card.title}
-            subTitle={card.subTitle}
-            time={card.time}
-            date={card.date}
-            totalTickets={card.totalTickets}
-            remainingTickets={card.remainingTickets}
-            bgColor={card.bgColor}
-          />
-        ))}
+        {activeTours.length !== 0 ? (
+          activeTours?.map((card, index) => (
+            <ActiveToursCard
+              onEdit={onEdit}
+              key={index}
+              title={card.category.name}
+              subTitle={card.name}
+              time={card.startTime}
+              date={card.startDate}
+              totalTickets={card.totalTickets}
+              remainingTickets={card.remainingTickets}
+              bgColor={card.category.color}
+              card={card}
+            />
+          ))
+        ) : (
+          <div>ERROR</div>
+        )}
       </div>
       <div className="tours-horizontal-border" />
       <div className="num-of-active-tours upcoming-tours">Upcoming Tours</div>
       <div className="active-tours-wrap-container">
-        {upcomingToursCard.map((card, index) => (
-          <ActiveToursCard
-            onEdit={onEdit}
-            key={index}
-            title={card.title}
-            subTitle={card.subTitle}
-            time={card.time}
-            date={card.date}
-            totalTickets={card.totalTickets}
-            remainingTickets={card.remainingTickets}
-            bgColor={card.bgColor}
-          />
-        ))}
+        {upComingTours.length !== 0 ? (
+          upComingTours?.map((card, index) => (
+            <ActiveToursCard
+              onEdit={onEdit}
+              key={index}
+              title={card.title}
+              subTitle={card.subTitle}
+              time={card.time}
+              date={card.date}
+              totalTickets={card.totalTickets}
+              remainingTickets={card.remainingTickets}
+              bgColor={card.bgColor}
+            />
+          ))
+        ) : (
+          <div>ERROR</div>
+        )}
       </div>
     </div>
   );

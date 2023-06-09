@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 
 import dotsIcon from "../../assets/svgs/donts-icon.svg";
+import { data } from "../LineChart";
 
 const ActiveToursCard = ({
   bgColor,
@@ -12,6 +13,7 @@ const ActiveToursCard = ({
   totalTickets,
   remainingTickets,
   onEdit,
+  card,
 }) => {
   return (
     <div className="active-tour-card">
@@ -46,12 +48,16 @@ const ActiveToursCard = ({
         {date}, <span>{time}</span>
       </div>
       <div className="category-wrapper">
-        <div className="category-name">Kids</div>
-        <div className="dot" />
-        <div className="category-name">Adult</div>
-        <div className="dot" />
-        <div className="category-name">Military</div>
+        {card?.availableTicket?.map((item, index) => {
+          return (
+            <div className="category-wrapper" key={index}>
+              <div className="category-name">{item.name}</div>
+              <div className="dot" />
+            </div>
+          );
+        })}
       </div>
+
       <div className="total-tickets-wrapper">
         <div className="total-ticket">
           Total Tickets: <span>{totalTickets}</span>

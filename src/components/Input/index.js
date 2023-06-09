@@ -14,6 +14,10 @@ const Input = ({
   top,
   fontSize,
   straric,
+  name,
+  handleChange,
+  handleBlur,
+  value,
 }) => {
   return (
     <div>
@@ -27,6 +31,9 @@ const Input = ({
       </div>
       <input
         className="input"
+        name={name}
+        onChange={handleChange}
+        onBlur={handleBlur}
         style={{
           height: height,
           borderRadius: radius,

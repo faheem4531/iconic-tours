@@ -14,6 +14,7 @@ import Calander from "./Calander";
 import SelectInput from "./SelectInput";
 import UsersTable from "./UsersTable";
 import ProtectRoute from "./ProtectRoute";
+import Loader from "./Loader";
 
 export {
   Sidebar,
@@ -32,4 +33,5 @@ export {
   SelectInput,
   UsersTable,
   ProtectRoute,
+  Loader,
 };
