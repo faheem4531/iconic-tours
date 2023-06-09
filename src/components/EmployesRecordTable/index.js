@@ -4,6 +4,10 @@ import "./style.css";
 import dotsIcon from "../../assets/svgs/donts-icon.svg";
 import userProfile from "../../assets/pngs/user-profile.png";
 
+const users = [
+  { name: "Nicholas Patrick", revenue: "$ 2540.58", ticketsSold: 559 },
+];
+
 const EmployesRecordTable = () => {
   return (
     <div className="table-container">
@@ -14,72 +18,36 @@ const EmployesRecordTable = () => {
           <th>Revenue Generated</th>
           <th>Tickets Sold</th>
         </tr>
-        <tr>
-          <div className="img-wrapper">
-            <img className="user-profile" src={userProfile} alt="img" />
-          </div>
-          <td className="name-des">Nicholas Patrick</td>
-          <td className="revenue-generated-des">$ 2540.58</td>
-          <td className="ticket-sold-des">559</td>
-          <td>
-            <img className="dots-icons" src={dotsIcon} alt="icon" />
-          </td>
-        </tr>
-        <tr>
-          <div className="img-wrapper">
-            <img className="user-profile" src={userProfile} alt="img" />
-          </div>
-          <td className="name-des">Nicholas Patrick</td>
-          <td className="revenue-generated-des">$ 2540.58</td>
-          <td className="ticket-sold-des">559</td>
-          <td>
-            <img className="dots-icons" src={dotsIcon} alt="icon" />
-          </td>
-        </tr>
-        <tr>
-          <div className="img-wrapper">
-            <img className="user-profile" src={userProfile} alt="img" />
-          </div>
-          <td className="name-des">Nicholas Patrick</td>
-          <td className="revenue-generated-des">$ 2540.58</td>
-          <td className="ticket-sold-des">559</td>
-          <td>
-            <img className="dots-icons" src={dotsIcon} alt="icon" />
-          </td>
-        </tr>
-        <tr>
-          <div className="img-wrapper">
-            <img className="user-profile" src={userProfile} alt="img" />
-          </div>
-          <td className="name-des">Nicholas Patrick</td>
-          <td className="revenue-generated-des">$ 2540.58</td>
-          <td className="ticket-sold-des">559</td>
-          <td>
-            <img className="dots-icons" src={dotsIcon} alt="icon" />
-          </td>
-        </tr>
-        <tr>
-          <div className="img-wrapper">
-            <img className="user-profile" src={userProfile} alt="img" />
-          </div>
-          <td className="name-des">Nicholas Patrick</td>
-          <td className="revenue-generated-des">$ 2540.58</td>
-          <td className="ticket-sold-des">559</td>
-          <td>
-            <img className="dots-icons" src={dotsIcon} alt="icon" />
-          </td>
-        </tr>
-        <tr>
-          <div className="img-wrapper">
-            <img className="user-profile" src={userProfile} alt="img" />
-          </div>
-          <td className="name-des">Nicholas Patrick</td>
-          <td className="revenue-generated-des">$ 2540.58</td>
-          <td className="ticket-sold-des">559</td>
-          <td>
-            <img className="dots-icons" src={dotsIcon} alt="icon" />
-          </td>
-        </tr>
+        {users.map((user, index) => (
+          <tr key={index}>
+            <td>
+              <div className="img-wrapper">
+                <img className="user-profile" src={userProfile} alt="img" />
+              </div>
+            </td>
+            <td className="name-des">{user.name}</td>
+            <td className="revenue-generated-des">{user.revenue}</td>
+            <td className="ticket-sold-des">{user.ticketsSold}</td>
+            <td>
+              <div className="dropdown">
+                <div
+                  style={{ padding: 7 }}
+                  id={`dropdownMenuButton${index}`}
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img className="dots-icons" src={dotsIcon} alt="icon" />
+                </div>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby={`dropdownMenuButton${index}`}>
+                  <li>
+                    <button className="dropdown-item">Delete</button>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        ))}
       </table>
     </div>
   );
