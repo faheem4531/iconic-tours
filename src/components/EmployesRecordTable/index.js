@@ -4,11 +4,12 @@ import "./style.css";
 import dotsIcon from "../../assets/svgs/donts-icon.svg";
 import userProfile from "../../assets/pngs/user-profile.png";
 
-const users = [
-  { name: "Nicholas Patrick", revenue: "$ 2540.58", ticketsSold: 559 },
-];
+// const users = [
+//   { name: "Nicholas Patrick", revenue: "$ 2540.58", ticketsSold: 559 },
+// ];
 
-const EmployesRecordTable = () => {
+const EmployesRecordTable = ({users}) => {
+  console.timeLog("user", users);
   return (
     <div className="table-container">
       <table className="table">
@@ -25,9 +26,9 @@ const EmployesRecordTable = () => {
                 <img className="user-profile" src={userProfile} alt="img" />
               </div>
             </td>
-            <td className="name-des">{user.name}</td>
-            <td className="revenue-generated-des">{user.revenue}</td>
-            <td className="ticket-sold-des">{user.ticketsSold}</td>
+            <td className="name-des">{user.user.firstName}</td>
+            <td className="revenue-generated-des">{user.revenue.totalRevenue}</td>
+            <td className="ticket-sold-des">{user.revenue.totalTickets}</td>
             <td>
               <div className="dropdown">
                 <div

@@ -11,6 +11,7 @@ const Users = () => {
     const res = await api.get("/api/v1/revenue/allUser");
     setLoading(false);
     setUsers(res.data);
+    console.log("user", res.data)
     setLoading();
   };
 

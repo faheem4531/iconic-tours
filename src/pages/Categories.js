@@ -7,6 +7,7 @@ import {
   CategoriesCard,
   Header,
   Input,
+  Loader,
   SelectInput,
 } from "../components";
 
@@ -17,13 +18,18 @@ const Categories = () => {
   };
 
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const getCategories = async () => {
+    setLoading(true);
     const res = await api.get("/api/v1/category");
+    setLoading(false);
     setCategories(res.data);
   };
 
   const creatCategory = async (nam) => {
+    setLoading(true);
     const res = await api.get("/api/v1/category");
+    setLoading(false);
     setCategories(res.data);
   };
 
@@ -67,6 +73,7 @@ const Categories = () => {
           </SelectInput>
         </AddNewButton>
       </div>
+      {!loading ? <div>
       {categories.map((card, index) => (
         <CategoriesCard
           key={index}
@@ -77,6 +84,10 @@ const Categories = () => {
           getCategories={getCategories}
         />
       ))}
+      </div>: <div className="loader-wrapper">
+          <Loader/>
+        </div>}
+      
     </div>
   );
 };

@@ -51,8 +51,8 @@ const ActiveToursCard = ({
         {card?.availableTicket?.map((item, index) => {
           return (
             <div className="category-wrapper" key={index}>
-              <div className="category-name">{item.name}</div>
               <div className="dot" />
+              <div className="category-name">{item.name}</div>
             </div>
           );
         })}
