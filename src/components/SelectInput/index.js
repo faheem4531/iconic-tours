@@ -1,16 +1,28 @@
 import React from "react";
 import "./style.css";
 
-const SelectInput = ({ children, label, color }) => {
+const SelectInput = ({
+  children,
+  label,
+  color,
+  handleChange,
+  handleBlur,
+  name,
+}) => {
   return (
     <div>
       <div className="select-label">
-        {label}
+        {label}{" "}
         <span className="span-star" style={{ color: color }}>
           *
         </span>
       </div>
-      <select class="form-select" aria-label="Default select example">
+      <select
+        name={name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        class="form-select"
+        aria-label="Default select example">
         {children}
       </select>
     </div>

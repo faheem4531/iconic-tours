@@ -15,6 +15,8 @@ import SelectInput from "./SelectInput";
 import UsersTable from "./UsersTable";
 import ProtectRoute from "./ProtectRoute";
 import Loader from "./Loader";
+import ServiceAndTaxation from "./ServiceAndTaxation";
+import MultiSelect from "./MultiSelect";
 
 export {
   Sidebar,
@@ -34,4 +36,6 @@ export {
   UsersTable,
   ProtectRoute,
   Loader,
+  ServiceAndTaxation,
+  MultiSelect,
 };

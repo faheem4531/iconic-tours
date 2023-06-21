@@ -1,30 +1,76 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import api from "../Services/Apis";
+
+import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
+
 import "../styles/UserProfile.css";
-
 import { Button, Header, Input, TicketsCard } from "../components";
-
-const ticketCard = [
-  {
-    title: "Kids",
-    subTitle: "2.9k",
-  },
-  {
-    title: "Adult",
-    subTitle: "1.5k",
-  },
-  {
-    title: "Military",
-    subTitle: "4.5k",
-  },
-  {
-    title: "Seniors",
-    subTitle: "3.5k",
-  },
-];
 
 const UserProfile = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
+  const ticketCard = [
+    {
+      title: "Kids",
+      subTitle: state.data?.revenue?.ticketCount?.adult?.tickets || 0,
+    },
+    {
+      title: "Adult",
+      subTitle: state.data?.revenue?.ticketCount?.child?.tickets || 0,
+    },
+    {
+      title: "Military",
+      subTitle: state.data?.revenue?.ticketCount?.military?.tickets || 0,
+    },
+    {
+      title: "Seniors",
+      subTitle: state.data?.revenue?.ticketCount?.senior?.tickets || 0,
+    },
+  ];
+
+  const [loading, setLoading] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: state.data.user.firstName || "",
+      lastName: state.data.user.lastName || "",
+      email: state.data.user.email || "",
+      phone: state.data.user.phone || "",
+      password: state.data.user.password || "",
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("First Name is required"),
+      lastName: Yup.string().required("Sur Name is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      phone: Yup.string().required("Phone Number is required"),
+      password: Yup.string().required("Password is required"),
+    }),
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        await api.put(`/api/v1/user/${state.data?.user?._id}`, {
+          ...values,
+          role: state.data.user.role,
+          password: "12345678",
+        });
+        toast("User Updated successfully", { type: "success" });
+        navigate("/users");
+      } catch (error) {
+        toast(error.response.data.message || "Failed to create user", {
+          type: "error",
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+  });
+
   return (
     <div>
       <Header title="Users" />
@@ -51,7 +97,10 @@ const UserProfile = () => {
           />
         </div>
         <div className="sold-tickets-card-wrapper">
-          <TicketsCard title="Tickets Sold" subTitle="2.5k" />
+          <TicketsCard
+            title="Tickets Sold"
+            subTitle={state.data.revenue.totalTickets}
+          />
           {ticketCard.map((card, inedex) => (
             <TicketsCard
               key={inedex}
@@ -62,15 +111,74 @@ const UserProfile = () => {
         </div>
         <div className="row user-profile-inputs-wrapper">
           <div className="col-6">
-            <Input label="First Name" type="text" placeholder="Name" />
-            <Input label="Email" type="eamil" placeholder="Name" />
-            <Input label="Password" type="password" placeholder="Password" />
+            <Input
+              label="First Name"
+              type="text"
+              placeholder="Name"
+              name="firstName"
+              value={formik.values.firstName}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+            />
+            {formik.touched.firstName && formik.errors.firstName && (
+              <div>{formik.errors.firstName}</div>
+            )}
+            <Input
+              label="Email"
+              type="eamil"
+              placeholder="Name"
+              name="email"
+              value={formik.values.email}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+            />
+            {formik.touched.email && formik.errors.email && (
+              <div>{formik.errors.email}</div>
+            )}
+            <Input
+              label="Password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formik.values.password}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+            />
+            {formik.touched.password && formik.errors.password && (
+              <div>{formik.errors.password}</div>
+            )}
           </div>
           <div className="col-6">
-            <Input label="Surname Name" type="text" placeholder="Sur Name" />
-            <Input label="Phone Number" type="text" placeholder="Phone Num" />
+            <Input
+              label="SurName"
+              type="text"
+              placeholder="SurName"
+              name="lastName"
+              value={formik.values.lastName}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+            />
+            {formik.touched.lastName && formik.errors.lastName && (
+              <div>{formik.errors.lastName}</div>
+            )}
+            <Input
+              label="Phone Number"
+              type="text"
+              placeholder="Phone Num"
+              name="phone"
+              value={formik.values.phone}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+            />
+            {formik.touched.phone && formik.errors.phone && (
+              <div>{formik.errors.phone}</div>
+            )}
             <div className="admin-save-button">
-              <Button title="Save" />
+              <Button
+                title="Save"
+                loading={loading}
+                onClick={formik.handleSubmit}
+              />
             </div>
           </div>
         </div>

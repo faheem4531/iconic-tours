@@ -1,0 +1,19 @@
+.assign-to {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 5px;
+  color: var(--light-black-color);
+  font-family: var(--main-font);
+  margin-top: 21px;
+}
+
+.ant-select {
+  z-index: 9999 !important;
+}
+
+.ant-select-dropdown {
+  z-index: 9999 !important;
+}

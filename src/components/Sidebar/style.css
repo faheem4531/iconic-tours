@@ -55,3 +55,7 @@
   text-decoration: none;
   margin-bottom: 15px;
 }
+.side-nav__item:hover img {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(71%) saturate(2834%)
+    hue-rotate(5deg) brightness(109%) contrast(102%);
+}

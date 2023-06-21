@@ -7,27 +7,29 @@ import {
   ToursCard,
   LineChart,
   Calander,
+  Loader,
 } from "../components";
 import "../styles/Home.css";
-import { Link } from "react-router-dom";
 import api from "../Services/Apis";
+
+import totalRevenueIcon from "../assets/svgs/total-revenue-icon.svg";
+import monthlyRevenue from "../assets/svgs/monthly-revenue-icon.svg";
+import preDayrevenue from "../assets/svgs/per-day-revenue.svg";
 
 const Home = () => {
   const navigate = useNavigate();
-  
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [tourOption, setTourOption] = useState("Active")
+  const [tourOption, setTourOption] = useState("Active");
 
   const [tours, setTours] = useState([]);
   const [activeTours, setActiveTours] = useState([]);
   const [upComingTours, setUpComingTours] = useState([]);
 
-
   const getTours = async () => {
     const res = await api.get("/api/v1/package");
     setTours(res.data);
-    console.log("res tour", res.data)
     const activeTours = res.data.filter((tour) => {
       return tour.upComing === false;
     });
@@ -41,21 +43,19 @@ const Home = () => {
   const getUsers = async () => {
     setLoading(true);
     const res = await api.get("/api/v1/revenue/allUser");
-    console.log("res", res)
     setLoading(false);
     setUsers(res.data);
     setLoading();
   };
 
-  const onOptionChange = e => {
-    setTourOption(e.target.value)
-  }
+  const onOptionChange = (e) => {
+    setTourOption(e.target.value);
+  };
 
   useEffect(() => {
     getUsers();
     getTours();
   }, []);
-
 
   return (
     <div class="home-container">
@@ -64,20 +64,32 @@ const Home = () => {
         <div className="col-6 ">
           <div className="sales-analysis-heading">Sales Analysis</div>
           <div className="row  vertical-border">
-            <div className="col-6 ">
-              <SalesAnalysisCard />
-              <SalesAnalysisCard />
-              <SalesAnalysisCard />
+            <div className="col-12 ">
+              <SalesAnalysisCard
+                title="Total Revenue"
+                Price="25k"
+                icon={totalRevenueIcon}
+              />
+              <SalesAnalysisCard
+                title="Monthly Revenue"
+                Price="15k"
+                icon={monthlyRevenue}
+              />
+              <SalesAnalysisCard
+                title="Per-Day Revenue"
+                Price="9k"
+                icon={preDayrevenue}
+              />
             </div>
-            <div className="col-6">
+            {/* <div className="col-6">
               <Calander />
-            </div>
+            </div> */}
             <LineChart />
           </div>
         </div>
         <div className="col-6">
           <div className="sales-analysis-heading">Employees Record</div>
-          <EmployesRecordTable users={users} />
+          <EmployesRecordTable users={users} loading={loading} />
           <div className="horizontal-border" />
           <div>
             <div className="viewl-all-tours-wrapper">
@@ -122,24 +134,36 @@ const Home = () => {
                 }}>
                 View All
               </button>
-              {/* <Link to="/tours">
-                <button className="view-all-tours">Viewl All</button>
-              </Link> */}
             </div>
-            <div className="scroll-wrapper">
-              <div className="tour-card-wrapper">
-                {tourOption === "Active" ? activeTours?.map((item) => {
-
-                  return <ToursCard item={item} />
-                }) : upComingTours?.map((item) => {
-                  return <ToursCard item={item} />
-                })}
-
-                {/* <ToursCard />
-                <ToursCard />
-                <ToursCard /> */}
+            {!loading ? (
+              <div className="scroll-wrapper">
+                <div className="tour-card-wrapper">
+                  {tourOption === "Active" ? (
+                    activeTours.length !== 0 ? (
+                      activeTours.map((item) => {
+                        return <ToursCard item={item} />;
+                      })
+                    ) : (
+                      <div className="error-message-tours ">
+                        No active tours available.
+                      </div>
+                    )
+                  ) : upComingTours.length !== 0 ? (
+                    upComingTours.map((item) => {
+                      return <ToursCard item={item} />;
+                    })
+                  ) : (
+                    <div className="error-message-tours ">
+                      No upcoming tours available.
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="active-and-upcoming-loader">
+                <Loader />
+              </div>
+            )}
           </div>
         </div>
       </div>

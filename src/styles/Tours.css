@@ -30,3 +30,94 @@
 .upcoming-tours {
   margin: 20px 20px;
 }
+.all-tousr-loader-wrapper {
+  text-align: center;
+  margin: 30px 0px;
+  width: 100%;
+}
+.all-tours-error-message {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: var(--dark-orange-color);
+  font-family: var(--main-font);
+  width: 100%;
+  text-align: center;
+  margin-top: 10vh;
+}
+.available-ticket-com {
+  position: relative;
+}
+.close-icon-tours {
+  position: absolute;
+  right: 22px;
+  top: 14px;
+  cursor: pointer;
+}
+.tours-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  margin-bottom: 5px;
+}
+.dropdown-arrow {
+  transform: rotate(180deg);
+  margin-right: 5px;
+}
+.services-and-taxation {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  color: var(--light-black-color);
+  font-family: var(--main-font);
+}
+
+.use-defind-ratio.form-check-label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  color: var(--light-black-color);
+  font-family: var(--main-font);
+}
+.use-defind-ratio-input {
+  outline: none;
+  width: 25px;
+  height: 20px;
+  border-radius: 3px;
+  border: 1px solid var(--light-gray-color);
+  margin-left: 4px;
+  font-family: var(--main-font);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--light-black-color);
+  padding: 2px;
+}
+.text-and-handling-title {
+  font-family: var(--main-font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--light-black-color);
+  margin-bottom: 10px;
+}
+.tax-and-services-content-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+.margin-wrapper {
+  margin-bottom: 25px;
+}
+.error-message {
+  color: red;
+}

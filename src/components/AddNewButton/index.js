@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 
 import addNewIcon from "../../assets/svgs/add-new-icon.svg";
 import { Button } from "../../components";
 
-const AddNewButton = ({ children, title }) => {
+const AddNewButton = ({ children, title, loading, onClick, onClose }) => {
+  useEffect(() => {
+    const myEl = document.getElementById("staticBackdrop");
+    myEl.addEventListener("hidden.bs.modal", function (event) {
+      onClose && onClose();
+    });
+  }, []);
+  console.log("Loading", loading);
+
   return (
     <>
       <button
@@ -28,7 +36,7 @@ const AddNewButton = ({ children, title }) => {
             <div className="modal-heading">{title}</div>
             <div class="modal-body">{children}</div>
             <div className="modal-button-wrapper">
-              <Button title="Create" />
+              <Button onClick={onClick} loading={loading} title="Create" />
             </div>
           </div>
         </div>

@@ -1,16 +1,14 @@
 import React from "react";
 import "./style.css";
 
-import totalRevenueIcon from "../../assets/svgs/total-revenue-icon.svg";
-
-const SalesAnalysisCard = () => {
+const SalesAnalysisCard = ({ title, Price, icon }) => {
   return (
     <div className="sales-analysis-card">
       <div className="revenue-wrapper">
-        <div className="total-revenue">Total Revenue</div>
-        <img src={totalRevenueIcon} alt="icon" />
+        <div className="total-revenue">{title}</div>
+        <img src={icon} alt="icon" />
       </div>
-      <div className="revenue-ammount">$25k</div>
+      <div className="revenue-ammount">${Price}</div>
     </div>
   );
 };

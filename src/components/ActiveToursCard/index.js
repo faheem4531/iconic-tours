@@ -1,8 +1,10 @@
 import React from "react";
-import "./style.css";
+import moment from "moment";
+import { toast } from "react-toastify";
+import api from "../../Services/Apis";
 
 import dotsIcon from "../../assets/svgs/donts-icon.svg";
-import { data } from "../LineChart";
+import "./style.css";
 
 const ActiveToursCard = ({
   bgColor,
@@ -14,7 +16,21 @@ const ActiveToursCard = ({
   remainingTickets,
   onEdit,
   card,
+  getTours,
+  id,
 }) => {
+  const deleteTours = async () => {
+    try {
+      await api.delete(`/api/v1/category/${id}`);
+      toast("Tour deleted successfully", { type: "success" });
+      getTours();
+    } catch (error) {
+      toast(error.response.data.message || "Failed to login", {
+        type: "error",
+      });
+    }
+  };
+
   return (
     <div className="active-tour-card">
       <div className="downtown-tours-wrapper">
@@ -38,14 +54,17 @@ const ActiveToursCard = ({
               </button>
             </li>
             <li>
-              <button class="dropdown-item">Delete</button>
+              <button onClick={deleteTours} class="dropdown-item">
+                Delete
+              </button>
             </li>
           </ul>
         </div>
       </div>
       <div className="tousr-sub-title">{subTitle}</div>
       <div className="tousr-date-time">
-        {date}, <span>{time}</span>
+        {moment(date).format("DD-MM-YYYY")},{" "}
+        <span>{moment(time).format("HH:mm:ss")}</span>
       </div>
       <div className="category-wrapper">
         {card?.availableTicket?.map((item, index) => {

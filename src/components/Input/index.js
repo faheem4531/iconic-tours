@@ -32,6 +32,7 @@ const Input = ({
       <input
         className="input"
         name={name}
+        value={value}
         onChange={handleChange}
         onBlur={handleBlur}
         style={{
