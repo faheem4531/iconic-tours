@@ -26,6 +26,8 @@ const Tours = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [users, setUsers] = useState([]);
 
+  console.log("ticketFor", ticketFor);
+
   const [services, setServices] = useState([
     {
       title: "Ticketing & Handling:",
@@ -112,7 +114,6 @@ const Tours = () => {
     const upComingTours = res.data.filter((tour) => {
       return tour.upComing === true;
     });
-    console.log(" all tours", res.data);
 
     setActiveTours(res.data);
     setUpCommingTours(upComingTours);
@@ -162,8 +163,7 @@ const Tours = () => {
             handleChange={(event) => {
               const index = ticketFor.findIndex((el) => el.name === type.name);
               const deepCopy = [...ticketFor];
-              deepCopy[index].originalPrice =
-                event.target.value == 0 ? 1 : event.target.value;
+              deepCopy[index].originalPrice = parseInt(event.target.value);
               setTicketFor(deepCopy);
             }}
           />
@@ -179,7 +179,7 @@ const Tours = () => {
             handleChange={(event) => {
               const index = ticketFor.findIndex((el) => el.name === type.name);
               const deepCopy = [...ticketFor];
-              deepCopy[index].discount = event.target.value;
+              deepCopy[index].discount = parseInt(event.target.value);
               setTicketFor(deepCopy);
             }}
             size="14px"
@@ -196,8 +196,6 @@ const Tours = () => {
       </div>
     );
   };
-
-  console.log("values", ticketFor);
 
   return (
     <div>
@@ -334,7 +332,7 @@ const Tours = () => {
                 height="38px"
                 radius="6px"
                 border="1px solid var(--bs-border-color)"
-                type="text"
+                type="number"
                 fontSize="14px"
               />
               {formik.touched.totalTickets && formik.errors.totalTickets && (
@@ -355,7 +353,7 @@ const Tours = () => {
 
                     return [
                       ...prev,
-                      { name: e.target.value, originalPrice: 1, discount: 0 },
+                      { name: e.target.value, originalPrice: "", discount: "" },
                     ];
                   })
                 }
@@ -371,14 +369,21 @@ const Tours = () => {
               </SelectInput>
             </div>
             <div className="col-12">
-              {ticketFor.map((type, index) => (
-                <Availableticket
-                  key={index}
-                  type={type}
-                  setTicketFor={setTicketFor}
-                  onClose={() => handleRemoveTicket(index)}
-                />
-              ))}
+              {ticketFor.map(
+                (type, index) =>
+                  Availableticket({
+                    key: index,
+                    type,
+                    setTicketFor,
+                    onClose: () => handleRemoveTicket(index),
+                  })
+                // <Availableticket
+                //   key={index}
+                //   type={type}
+                //   setTicketFor={setTicketFor}
+                //   onClose={() => handleRemoveTicket(index)}
+                // />
+              )}
             </div>
             <div className="col-12">
               <div

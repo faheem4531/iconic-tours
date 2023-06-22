@@ -131,7 +131,7 @@ const Users = () => {
             <div>{formik.errors.email}</div>
           )}
           <Input
-            placeholder="+92 333 333 3333"
+            placeholder="00 000 000"
             label="Phone Number"
             name="phone"
             color="var(--blue-color)"

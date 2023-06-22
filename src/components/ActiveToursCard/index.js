@@ -21,7 +21,7 @@ const ActiveToursCard = ({
 }) => {
   const deleteTours = async () => {
     try {
-      await api.delete(`/api/v1/category/${id}`);
+      await api.delete(`/api/v1/package/${id}`);
       toast("Tour deleted successfully", { type: "success" });
       getTours();
     } catch (error) {
@@ -63,8 +63,7 @@ const ActiveToursCard = ({
       </div>
       <div className="tousr-sub-title">{subTitle}</div>
       <div className="tousr-date-time">
-        {moment(date).format("DD-MM-YYYY")},{" "}
-        <span>{moment(time).format("HH:mm:ss")}</span>
+        {date}, <span>{time}</span>
       </div>
       <div className="category-wrapper">
         {card?.availableTicket?.map((item, index) => {
