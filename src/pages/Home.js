@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import * as moment from 'moment-timezone';
 import {
   Header,
   SalesAnalysisCard,
@@ -22,20 +24,20 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tourOption, setTourOption] = useState("Active");
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const [tours, setTours] = useState([]);
   const [activeTours, setActiveTours] = useState([]);
   const [upComingTours, setUpComingTours] = useState([]);
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [totalRevenuePerDay, setTotalRevenuePerDay] = useState(0);
+  const [totalRevenuePerMonth, setTotalRevenuePerMonth] = useState(0);
 
   const getTours = async () => {
     const res = await api.get("/api/v1/package");
     setTours(res.data);
-    const activeTours = res.data.filter((tour) => {
-      return tour.upComing === false;
-    });
-    const upComingTours = res.data.filter((tour) => {
-      return tour.upComing === true;
-    });
+    const activeTours = res.data.filter((tour) => tour.upComing === false);
+    const upComingTours = res.data.filter((tour) => tour.upComing === true);
     setActiveTours(activeTours);
     setUpComingTours(upComingTours);
   };
@@ -48,11 +50,76 @@ const Home = () => {
     setLoading();
   };
 
+  const deleteUser = async (id) => {
+    try {
+      await api.delete(`/api/v1/user/${id}`);
+      toast("User deleted successfully", { type: "success" });
+      getUsers();
+    } catch (error) {
+      toast(error.response.data.message || "Failed to login", {
+        type: "error",
+      });
+    }
+  };
+
+  const getTotalRevenue = async () => {
+    try {
+      const res = await api.get(`/api/v1/revenue/filter`);
+      const formatedRevenue = formatNumber(res.data.totalRevenue);
+      setTotalRevenue(formatedRevenue)
+    } catch (error) {
+      toast(error.response.data.message || "Something went wrong!", {
+        type: "error",
+      });
+    }
+  }
+
+  const getPerDayRevenue = async (date) => {
+    try {
+      const res = await api.get(`/api/v1/revenue/filter?date=${date}`);
+      const formatedRevenue = formatNumber(res.data.totalRevenue);
+      setTotalRevenuePerDay(formatedRevenue)
+    } catch (error) {
+      toast(error.response.data.message || "Something went wrong!", {
+        type: "error",
+      });
+    }
+  }
+
+  const getPerMonthRevenue = async (date) => {
+    try {
+      const res = await api.get(`/api/v1/revenue/filter?month=${date}`);
+      const formatedRevenue = formatNumber(res.data.totalRevenue);
+      setTotalRevenuePerMonth(formatedRevenue)
+    } catch (error) {
+      toast(error.response.data.message || "Something went wrong!", {
+        type: "error",
+      });
+    }
+  }
+
+
+  const handleDateChange = date => {
+    const formatedDate = moment(date).format("YYYY-MM-DD");
+    getPerDayRevenue(formatedDate)
+    getPerMonthRevenue(formatedDate)
+    setSelectedDate(formatedDate);
+  };
+
+  function formatNumber(num) {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'k';
+    }
+    return num;
+  }
+  
   const onOptionChange = (e) => {
     setTourOption(e.target.value);
   };
 
   useEffect(() => {
+    handleDateChange(new Date());
+    getTotalRevenue();
     getUsers();
     getTours();
   }, []);
@@ -64,32 +131,32 @@ const Home = () => {
         <div className="col-6 ">
           <div className="sales-analysis-heading">Sales Analysis</div>
           <div className="row  vertical-border">
-            <div className="col-12 ">
+            <div className="col-6">
               <SalesAnalysisCard
                 title="Total Revenue"
-                Price="25k"
+                Price={totalRevenue}
                 icon={totalRevenueIcon}
               />
               <SalesAnalysisCard
                 title="Monthly Revenue"
-                Price="15k"
+                Price={totalRevenuePerMonth ? totalRevenuePerMonth : 0}
                 icon={monthlyRevenue}
               />
               <SalesAnalysisCard
                 title="Per-Day Revenue"
-                Price="9k"
+                Price={totalRevenuePerDay ? totalRevenuePerDay : 0}
                 icon={preDayrevenue}
               />
             </div>
-            {/* <div className="col-6">
-              <Calander />
-            </div> */}
+            <div className="col-6">
+              <Calander handleDateChange={handleDateChange} value={selectedDate}/>
+            </div>
             <LineChart />
           </div>
         </div>
         <div className="col-6">
           <div className="sales-analysis-heading">Employees Record</div>
-          <EmployesRecordTable users={users} loading={loading} />
+          <EmployesRecordTable users={users} loading={loading} deleteUser={deleteUser} />
           <div className="horizontal-border" />
           <div>
             <div className="viewl-all-tours-wrapper">

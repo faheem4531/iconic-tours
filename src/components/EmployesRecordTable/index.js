@@ -5,7 +5,7 @@ import dotsIcon from "../../assets/svgs/donts-icon.svg";
 import userProfile from "../../assets/pngs/user-profile.png";
 import Loader from "../Loader";
 
-const EmployesRecordTable = ({ users, loading }) => {
+const EmployesRecordTable = ({ users, loading, deleteUser }) => {
   return (
     <div className="table-container">
       {!loading ? (
@@ -20,7 +20,8 @@ const EmployesRecordTable = ({ users, loading }) => {
             <tr key={index}>
               <td>
                 <div className="img-wrapper">
-                  <img className="user-profile" src={userProfile} alt="img" />
+                <img src={`https://ui-avatars.com/api/?name=${user.user.firstName}`} style={{ borderRadius: '50%' }} alt="Avatar" />
+                  {/* <img className="user-profile" src={userProfile} alt="img" /> */}
                 </div>
               </td>
               <td className="name-des">{user.user.firstName}</td>
@@ -41,7 +42,7 @@ const EmployesRecordTable = ({ users, loading }) => {
                     className="dropdown-menu"
                     aria-labelledby={`dropdownMenuButton${index}`}>
                     <li>
-                      <button className="dropdown-item">Delete</button>
+                      <button className="dropdown-item" onClick={()=>{deleteUser(user.user._id)}}>Delete</button>
                     </li>
                   </ul>
                 </div>
