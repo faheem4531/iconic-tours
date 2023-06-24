@@ -8,6 +8,7 @@ const SelectInput = ({
   handleChange,
   handleBlur,
   name,
+  value,
 }) => {
   return (
     <div>
@@ -21,6 +22,7 @@ const SelectInput = ({
         name={name}
         onChange={handleChange}
         onBlur={handleBlur}
+        value={value}
         class="form-select"
         aria-label="Default select example">
         {children}

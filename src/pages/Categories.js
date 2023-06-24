@@ -15,13 +15,17 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 const Categories = () => {
-  const onEdit = () => {
+  const onEdit = (category) => {
+    formik.setFieldValue("name", category.name);
+    formik.setFieldValue("subHeading", category.subHeading);
+    formik.setFieldValue("color", category.color);
     const btn = document.getElementById("openModalBtn");
     btn.click();
   };
 
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const getCategories = async () => {
     setLoading(true);
     const res = await api.get("/api/v1/category");
@@ -29,12 +33,6 @@ const Categories = () => {
     setCategories(res.data);
   };
 
-  const creatCategory = async (nam) => {
-    setLoading(true);
-    const res = await api.get("/api/v1/category");
-    setLoading(false);
-    setCategories(res.data);
-  };
   useEffect(() => {
     getCategories();
   }, []);
@@ -50,23 +48,35 @@ const Categories = () => {
       subHeading: Yup.string().required("Sub Title is required"),
       color: Yup.string().required("Color is required"),
     }),
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values) => {
       setLoading(true);
       try {
-        const res = await api.post("/api/v1/category", values);
-        toast("Category created successfully", { type: "success" });
-        setCategories([...categories, res.data]); // Update categories with the new category
-        formik.resetForm(); // Reset form values
+        selectedCategoryId
+          ? await api.put(`/api/v1/category/${selectedCategoryId}`, values)
+          : await api.post("/api/v1/category", values);
+        toast(
+          `Category ${selectedCategoryId ? "updated" : "created"} successfully`,
+          {
+            type: "success",
+          }
+        );
+        getCategories();
+        let closeBtn = document.getElementById("closeMmodalBtn");
+        closeBtn.click();
+        formik.resetForm();
       } catch (error) {
         toast(error.response.data.message || "Failed to create category", {
           type: "error",
         });
       } finally {
         setLoading(false);
-        setSubmitting(false);
       }
     },
   });
+
+  const onClose = () => {
+    setSelectedCategoryId(null);
+  };
 
   return (
     <div>
@@ -75,7 +85,9 @@ const Categories = () => {
         <AddNewButton
           title="Add New Category"
           loading={loading}
-          onClick={formik.handleSubmit}>
+          onClick={formik.handleSubmit}
+          onClose={onClose}
+          selectedCategoryId={selectedCategoryId}>
           <Input
             placeholder="Title"
             label="Title"
@@ -90,6 +102,7 @@ const Categories = () => {
             fontSize="14px"
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
+            value={formik.values.name}
           />
           {formik.touched.name && formik.errors.name && (
             <div>{formik.errors.name}</div>
@@ -107,6 +120,7 @@ const Categories = () => {
             fontSize="14px"
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
+            value={formik.values.subHeading}
           />
           {formik.touched.subHeading && formik.errors.subHeading && (
             <div>{formik.errors.subHeading}</div>
@@ -114,6 +128,7 @@ const Categories = () => {
           <SelectInput
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
+            value={formik.values.color}
             label="Color"
             name="color">
             <option value="#17B890">Green</option>
@@ -134,7 +149,9 @@ const Categories = () => {
               title={`${card.name} ${card.subHeading}`}
               bgColor={card.color}
               onEdit={onEdit}
+              setSelectedCategoryId={setSelectedCategoryId}
               id={card._id}
+              category={card}
               getCategories={getCategories}
             />
           ))}

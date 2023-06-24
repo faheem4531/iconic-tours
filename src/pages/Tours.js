@@ -25,6 +25,7 @@ const Tours = () => {
   const [upComingTours, setUpCommingTours] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [users, setUsers] = useState([]);
+  const [selectedPackageId, setSelectedPackageId] = useState(null);
 
   const [services, setServices] = useState([
     {
@@ -75,13 +76,20 @@ const Tours = () => {
       };
       try {
         setLoading(true);
-        await api.post("/api/v1/package", payload);
-        toast("Package created successfully", { type: "success" });
+        selectedPackageId
+          ? await api.put(`/api/v1/package/${selectedPackageId}`, payload)
+          : await api.post("/api/v1/package", payload);
+        toast(
+          `Package ${selectedPackageId ? "updated" : "created"} successfully`,
+          { type: "success" }
+        );
         setLoading(false);
-
-        const modal = document.getElementById("staticBackdrop");
-        modal.modal("hide");
+        getTours();
+        setSelectedPackageId(null);
+        let closeBtn = document.getElementById("closeMmodalBtn");
+        closeBtn.click();
       } catch (error) {
+        setLoading(false);
         toast(error.response.data.message || "Failed to create package", {
           type: "error",
         });
@@ -134,7 +142,15 @@ const Tours = () => {
     getUsers();
   }, []);
 
-  const onEdit = () => {
+  const onEdit = (data) => {
+    formik.setFieldValue("name", data.name);
+    formik.setFieldValue("category", data.category.name);
+    formik.setFieldValue("user", data.user);
+    formik.setFieldValue("startDate", data.startDate);
+    formik.setFieldValue("endDate", data.endDate);
+    formik.setFieldValue("startTime", data.startTime);
+    formik.setFieldValue("endTime", data.endTime);
+    formik.setFieldValue("totalTickets", data.totalTickets);
     const btn = document.getElementById("openModalBtn");
     btn.click();
   };
@@ -199,16 +215,20 @@ const Tours = () => {
     <div>
       <Header title="Tours" />
       <div className="active-tours-wrapper">
-        <div className="num-of-active-tours">Active Tours{`(${activeTours.length})`}</div>
+        <div className="num-of-active-tours">
+          Active Tours{`(${activeTours.length})`}
+        </div>
         <AddNewButton
           loading={loading}
           title="Add Tour"
           onClose={() => formik.resetForm()}
-          onClick={formik.handleSubmit}>
+          onClick={formik.handleSubmit}
+          selectedCategoryId={selectedPackageId}>
           <Input
             placeholder="Downtown"
             label="Tour Name"
             name="name"
+            value={formik.values.name}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             color="var(--dark-orange-color)"
@@ -482,6 +502,7 @@ const Tours = () => {
                 date={card.startDate}
                 totalTickets={card.totalTickets}
                 remainingTickets={card.remainingTickets}
+                setSelectedPackageId={setSelectedPackageId}
                 bgColor={card.category.color}
                 card={card}
                 id={card._id}
@@ -500,7 +521,9 @@ const Tours = () => {
         </div>
       )}
       <div className="tours-horizontal-border" />
-      <div className="num-of-active-tours upcoming-tours">Upcoming Tours{`(${upComingTours.length})`}</div>
+      <div className="num-of-active-tours upcoming-tours">
+        Upcoming Tours{`(${upComingTours.length})`}
+      </div>
       {!loading ? (
         <div className="active-tours-wrap-container">
           {upComingTours.length !== 0 ? (

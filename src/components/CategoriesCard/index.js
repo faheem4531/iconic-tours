@@ -5,7 +5,15 @@ import "./style.css";
 import dotsIcon from "../../assets/svgs/dots-white-icon.svg";
 import api from "../../Services/Apis";
 
-const CategoriesCard = ({ bgColor, title, onEdit, id, getCategories }) => {
+const CategoriesCard = ({
+  bgColor,
+  title,
+  onEdit,
+  setSelectedCategoryId,
+  id,
+  getCategories,
+  category,
+}) => {
   const deleteCategory = async () => {
     try {
       await api.delete(`/api/v1/category/${id}`);
@@ -33,7 +41,12 @@ const CategoriesCard = ({ bgColor, title, onEdit, id, getCategories }) => {
           </div>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
-              <button class="dropdown-item" onClick={onEdit}>
+              <button
+                class="dropdown-item"
+                onClick={() => {
+                  onEdit(category);
+                  setSelectedCategoryId(id);
+                }}>
                 Edit
               </button>
             </li>
