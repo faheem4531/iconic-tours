@@ -26,8 +26,6 @@ const Tours = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [users, setUsers] = useState([]);
 
-  console.log("ticketFor", ticketFor);
-
   const [services, setServices] = useState([
     {
       title: "Ticketing & Handling:",
@@ -69,7 +67,7 @@ const Tours = () => {
     onSubmit: async (data) => {
       const payload = {
         ...data,
-        upComming: false,
+        upComing: false,
         taxation: services.map((service) => ({
           [service.name]: service.value,
         })),
@@ -109,13 +107,13 @@ const Tours = () => {
     setLoading(false);
     setTours(res.data);
     const activeTours = res.data.filter((tour) => {
-      return tour.upComing === false;
-    });
-    const upComingTours = res.data.filter((tour) => {
       return tour.upComing === true;
     });
+    const upComingTours = res.data.filter((tour) => {
+      return tour.upComing === false;
+    });
 
-    setActiveTours(res.data);
+    setActiveTours(activeTours);
     setUpCommingTours(upComingTours);
   };
 
@@ -201,7 +199,7 @@ const Tours = () => {
     <div>
       <Header title="Tours" />
       <div className="active-tours-wrapper">
-        <div className="num-of-active-tours">Active Tours (3)</div>
+        <div className="num-of-active-tours">Active Tours{`(${activeTours.length})`}</div>
         <AddNewButton
           loading={loading}
           title="Add Tour"
@@ -502,7 +500,7 @@ const Tours = () => {
         </div>
       )}
       <div className="tours-horizontal-border" />
-      <div className="num-of-active-tours upcoming-tours">Upcoming Tours</div>
+      <div className="num-of-active-tours upcoming-tours">Upcoming Tours{`(${upComingTours.length})`}</div>
       {!loading ? (
         <div className="active-tours-wrap-container">
           {upComingTours.length !== 0 ? (
@@ -510,13 +508,16 @@ const Tours = () => {
               <ActiveToursCard
                 onEdit={onEdit}
                 key={index}
-                title={card.title}
-                subTitle={card.subTitle}
-                time={card.time}
-                date={card.date}
+                title={card.category.name}
+                subTitle={card.name}
+                time={card.startTime}
+                date={card.startDate}
                 totalTickets={card.totalTickets}
                 remainingTickets={card.remainingTickets}
-                bgColor={card.bgColor}
+                bgColor={card.category.color}
+                card={card}
+                id={card._id}
+                getTours={getTours}
               />
             ))
           ) : (

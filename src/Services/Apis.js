@@ -1,7 +1,8 @@
 import Axios from "axios";
 
 const api = Axios.create({
-  baseURL: "http://iconic-tours-env.us-east-1.elasticbeanstalk.com/",
+  baseURL:"http://iconic-tours.us-east-1.elasticbeanstalk.com/",
+  // baseURL: "http://iconic-tours-env.us-east-1.elasticbeanstalk.com/",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

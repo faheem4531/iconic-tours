@@ -123,7 +123,7 @@ const Home = () => {
                   <label
                     class="form-check-label radio-button-label"
                     for="flexRadioCheckedDisabled">
-                    Upcoming Tours
+                    Upcoming Tours{`(${upComingTours.length})`}
                   </label>
                 </div>
               </div>
