@@ -15,6 +15,7 @@ const ActiveToursCard = ({
   totalTickets,
   remainingTickets,
   onEdit,
+  setSelectedPackageId,
   card,
   getTours,
   id,
@@ -49,7 +50,12 @@ const ActiveToursCard = ({
           </div>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
-              <button class="dropdown-item" onClick={onEdit}>
+              <button
+                class="dropdown-item"
+                onClick={() => {
+                  onEdit(card);
+                  setSelectedPackageId(id);
+                }}>
                 Edit
               </button>
             </li>
