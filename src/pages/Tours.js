@@ -63,6 +63,7 @@ const Tours = () => {
       endDate: "2023-06-13",
       startTime: "12:00",
       endTime: "12:00",
+      // upComing: "Active Tours",
       totalTickets: 1,
     },
     onSubmit: async (data) => {
@@ -76,6 +77,7 @@ const Tours = () => {
       };
       try {
         setLoading(true);
+        console.log("payload", payload);
         selectedPackageId
           ? await api.put(`/api/v1/package/${selectedPackageId}`, payload)
           : await api.post("/api/v1/package", payload);
@@ -106,6 +108,7 @@ const Tours = () => {
       startTime: Yup.string().required("Start time is required"),
       endTime: Yup.string().required("End time is required"),
       totalTickets: Yup.string().required("Total tickets are required"),
+      // upComing: Yup.string().required("Dropdown value is required"),
     }),
   });
 
@@ -151,6 +154,7 @@ const Tours = () => {
     formik.setFieldValue("startTime", data.startTime);
     formik.setFieldValue("endTime", data.endTime);
     formik.setFieldValue("totalTickets", data.totalTickets);
+    // formik.setFieldValue("upComing", data.upComing);
     const btn = document.getElementById("openModalBtn");
     btn.click();
   };
@@ -243,6 +247,19 @@ const Tours = () => {
           {formik.touched.name && formik.errors.name && (
             <div className="error-message">{formik.errors.name}</div>
           )}
+          {/* <SelectInput
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            value={formik.values.tours}
+            label="Tours"
+            name="upComing"
+            color="var(--dark-orange-color)">
+            <option value={true}>Active Tours</option>
+            <option value={false}>Upcoming Tours</option>
+          </SelectInput>
+          {formik.touched.upComing && formik.errors.upComing && (
+            <div className="error-message">{formik.errors.upComing}</div>
+          )} */}
           <SelectInput
             label="Add To category"
             color="var(--dark-orange-color)"
@@ -541,6 +558,7 @@ const Tours = () => {
                 card={card}
                 id={card._id}
                 getTours={getTours}
+                setSelectedPackageId={setSelectedPackageId}
               />
             ))
           ) : (

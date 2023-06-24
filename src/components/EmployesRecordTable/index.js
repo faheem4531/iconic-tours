@@ -20,8 +20,11 @@ const EmployesRecordTable = ({ users, loading, deleteUser }) => {
             <tr key={index}>
               <td>
                 <div className="img-wrapper">
-                <img src={`https://ui-avatars.com/api/?name=${user.user.firstName}`} style={{ borderRadius: '50%' }} alt="Avatar" />
-                  {/* <img className="user-profile" src={userProfile} alt="img" /> */}
+                  <img
+                    src={`https://ui-avatars.com/api/?name=${user.user.firstName}`}
+                    className="user-profile"
+                    alt="Avatar"
+                  />
                 </div>
               </td>
               <td className="name-des">{user.user.firstName}</td>
@@ -42,7 +45,13 @@ const EmployesRecordTable = ({ users, loading, deleteUser }) => {
                     className="dropdown-menu"
                     aria-labelledby={`dropdownMenuButton${index}`}>
                     <li>
-                      <button className="dropdown-item" onClick={()=>{deleteUser(user.user._id)}}>Delete</button>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => {
+                          deleteUser(user.user._id);
+                        }}>
+                        Delete
+                      </button>
                     </li>
                   </ul>
                 </div>
