@@ -131,6 +131,9 @@ const Categories = () => {
             value={formik.values.color}
             label="Color"
             name="color">
+            <option disabled key={"select"} value={""}>
+              Select Colour
+            </option>
             <option value="#17B890">Green</option>
             <option value="#253DF0">Blue</option>
             <option value="#F5D02C">Yellow</option>

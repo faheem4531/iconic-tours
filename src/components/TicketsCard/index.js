@@ -12,7 +12,7 @@ const TicketsCard = ({ title, subTitle, textAlign, color, bgColor, width }) => {
       <div
         className="ticket-card-sub-title"
         style={{ textAlign: textAlign, color: color }}>
-        {subTitle}
+        ${subTitle}
       </div>
     </div>
   );

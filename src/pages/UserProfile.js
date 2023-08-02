@@ -77,9 +77,11 @@ const UserProfile = () => {
       <div className="user-profile-content-wrapper">
         <div className="user-profile-header">
           <div className="user-profile-wrapper">
-            <div className="user-profile-bg-img">
-              {/* <img className="user-profile-img" src={Admin Image} alt="img"/> */}
-            </div>
+            <img
+              src={`https://ui-avatars.com/api/?name=${state?.data?.user?.firstName}`}
+              className="admin-profile"
+              alt="Avatar"
+            />
             <div>
               <div className="user-profile-name">
                 {state.data.user.firstName}
@@ -89,7 +91,7 @@ const UserProfile = () => {
           </div>
           <TicketsCard
             title="Total Revenue"
-            subTitle={`$${state.data.revenue.totalRevenue}`}
+            subTitle={state.data.revenue.totalRevenue}
             textAlign="center"
             bgColor="#F2F8FB"
             color="var(--dark-orange-color)"
@@ -135,7 +137,7 @@ const UserProfile = () => {
             {formik.touched.email && formik.errors.email && (
               <div>{formik.errors.email}</div>
             )}
-            <Input
+            {/* <Input
               label="Password"
               type="password"
               name="password"
@@ -146,7 +148,7 @@ const UserProfile = () => {
             />
             {formik.touched.password && formik.errors.password && (
               <div>{formik.errors.password}</div>
-            )}
+            )} */}
           </div>
           <div className="col-6">
             <Input

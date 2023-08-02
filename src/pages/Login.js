@@ -21,12 +21,18 @@ const Login = () => {
       setLoading(true);
       try {
         const res = await api.post("/api/v1/user/login", data);
-        setLoading(false);
-        toast("Signed in successfully", { type: "success" });
-        localStorage.setItem("token", res.data.accessToken);
-        localStorage.setItem("userId", res.data.data._id);
-        api.defaults.headers.Authorization = `Bearer ${res.data.accessToken}`;
-        navigate("/");
+        console.log("res", res);
+        if (res?.data?.data?.role === "ADMIN") {
+          setLoading(false);
+          toast("Signed in successfully", { type: "success" });
+          localStorage.setItem("token", res.data.accessToken);
+          localStorage.setItem("userId", res.data.data._id);
+          api.defaults.headers.Authorization = `Bearer ${res.data.accessToken}`;
+          navigate("/");
+        } else {
+          toast("You are not Authorize", { type: "error" });
+          setLoading(false);
+        }
       } catch (error) {
         setLoading(false);
         toast(error.response.data.message || "Failed to login", {

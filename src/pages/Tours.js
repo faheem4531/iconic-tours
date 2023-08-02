@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-
+import moment from "moment";
 import api from "../Services/Apis";
 import {
   ActiveToursCard,
@@ -27,56 +27,69 @@ const Tours = () => {
   const [users, setUsers] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState(null);
 
-  const [services, setServices] = useState([
+  console.log("allCategories", allCategories);
+
+  const defaultServices = [
     {
       title: "Ticketing & Handling:",
       name: "tickingHandling",
       type: "ratio",
-      value: 5,
+      value: 0,
     },
     {
       title: "Services:",
       name: "services",
       type: "ratio",
-      value: 5,
+      value: 0,
     },
     {
       title: "Fuel:",
       name: "fuel",
       type: "ratio",
-      value: 5,
+      value: 0,
     },
     {
       title: "Tax:",
       name: "tax",
       type: "ratio",
-      value: 5,
+      value: 0,
     },
-  ]);
+  ];
+
+  const [services, setServices] = useState(defaultServices);
 
   const formik = useFormik({
     initialValues: {
       name: "",
       category: "",
       user: [],
-      startDate: "2023-06-13",
-      endDate: "2023-06-13",
+      startDate: moment(new Date()).format("YYYY MM DD"),
+      // startDate: new Date().toISOString().split("T")[0],
+      endDate: moment(new Date()).format("YYYY MM DD"),
+      // endDate: new Date().toISOString().split("T")[0],
       startTime: "12:00",
       endTime: "12:00",
-      // upComing: "Active Tours",
-      totalTickets: 1,
+      upComing: false,
+      totalTickets: 0,
     },
     onSubmit: async (data) => {
+      setLoading(true);
+      console.log("data", data);
+      const upComingValue = data.upComing === "true" ? true : false;
       const payload = {
         ...data,
-        upComing: false,
+        upComing: upComingValue,
         taxation: services.map((service) => ({
           [service.name]: service.value,
         })),
         availableTicket: ticketFor,
       };
+      console.log("ttttttt12", payload);
       try {
-        setLoading(true);
+        console.log("into try");
+        console.log("sssssss");
+        if (payload.availableTicket.length === 0)
+          throw new Error("Failed to create package");
         console.log("payload", payload);
         selectedPackageId
           ? await api.put(`/api/v1/package/${selectedPackageId}`, payload)
@@ -90,9 +103,12 @@ const Tours = () => {
         setSelectedPackageId(null);
         let closeBtn = document.getElementById("closeMmodalBtn");
         closeBtn.click();
+        formik.resetForm();
+        setTicketFor([]);
+        setServices(defaultServices);
       } catch (error) {
         setLoading(false);
-        toast(error.response.data.message || "Failed to create package", {
+        toast(error?.response?.data?.message || "Failed to create package", {
           type: "error",
         });
       }
@@ -108,7 +124,7 @@ const Tours = () => {
       startTime: Yup.string().required("Start time is required"),
       endTime: Yup.string().required("End time is required"),
       totalTickets: Yup.string().required("Total tickets are required"),
-      // upComing: Yup.string().required("Dropdown value is required"),
+      upComing: Yup.boolean().required("Dropdown value is required"),
     }),
   });
 
@@ -118,10 +134,10 @@ const Tours = () => {
     setLoading(false);
     setTours(res.data);
     const activeTours = res.data.filter((tour) => {
-      return tour.upComing === true;
+      return tour.upComing === false;
     });
     const upComingTours = res.data.filter((tour) => {
-      return tour.upComing === false;
+      return tour.upComing === true;
     });
 
     setActiveTours(activeTours);
@@ -130,7 +146,6 @@ const Tours = () => {
 
   const getAllCategories = async () => {
     const res = await api.get("/api/v1/category");
-    formik.setFieldValue("category", res.data[0]?._id);
     setAllCategories(res.data);
   };
 
@@ -154,7 +169,7 @@ const Tours = () => {
     formik.setFieldValue("startTime", data.startTime);
     formik.setFieldValue("endTime", data.endTime);
     formik.setFieldValue("totalTickets", data.totalTickets);
-    // formik.setFieldValue("upComing", data.upComing);
+    formik.setFieldValue("upComing", data.upComing);
     const btn = document.getElementById("openModalBtn");
     btn.click();
   };
@@ -247,29 +262,39 @@ const Tours = () => {
           {formik.touched.name && formik.errors.name && (
             <div className="error-message">{formik.errors.name}</div>
           )}
-          {/* <SelectInput
+          <SelectInput
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
             value={formik.values.tours}
             label="Tours"
             name="upComing"
             color="var(--dark-orange-color)">
-            <option value={true}>Active Tours</option>
-            <option value={false}>Upcoming Tours</option>
+            <option value={false}>Active Tour</option>
+            <option value={true}>Upcoming Tours</option>
           </SelectInput>
           {formik.touched.upComing && formik.errors.upComing && (
             <div className="error-message">{formik.errors.upComing}</div>
-          )} */}
+          )}
           <SelectInput
-            label="Add To category"
-            color="var(--dark-orange-color)"
-            name="category"
             handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}>
-            {allCategories.map((cat) => (
-              <option value={cat._id}>{cat.name}</option>
+            handleBlur={formik.handleBlur}
+            value={formik.values.category}
+            label="Add To category"
+            name="category"
+            placeholder="Select"
+            color="var(--dark-orange-color)">
+            <option disabled key={"select"} value={""}>
+              Select Category
+            </option>
+            {allCategories?.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
             ))}
           </SelectInput>
+          {formik.touched.category && formik.errors.category && (
+            <div className="error-message">{formik.errors.category}</div>
+          )}
           <div className="row">
             <div className="col-6">
               <Input

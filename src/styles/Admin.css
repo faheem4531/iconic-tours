@@ -3,14 +3,10 @@
   align-items: center;
   gap: 15px;
 }
-.admin-bg-img {
-  background-image: url(../assets/pngs/admin-bg.png);
+.admin-profile {
   width: 90px;
   height: 90px;
   border-radius: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .admin-img {
   width: 90px;
@@ -47,7 +43,7 @@
   min-height: 80vh;
 }
 .admin-inputs-wrapper {
-  margin-top: 50px;
+  padding-top: 50px;
 }
 .admin-save-button {
   margin-left: auto;

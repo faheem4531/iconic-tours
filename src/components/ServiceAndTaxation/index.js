@@ -19,7 +19,7 @@ const ServiceAndTaxation = ({
             checked={type === "ratio"}
             onClick={() => {
               setSelectType("ratio");
-              setValue(1);
+              setValue(0);
             }}
           />
           <label
@@ -31,7 +31,7 @@ const ServiceAndTaxation = ({
         <input
           className="use-defind-ratio-input"
           placeholder="5%"
-          onChange={(event) => setValue(event.target.value || 1)}
+          onChange={(event) => setValue(event.target.value || 0)}
           value={type !== "ratio" ? null : value}
           disabled={type !== "ratio"}
         />
@@ -42,7 +42,7 @@ const ServiceAndTaxation = ({
             checked={type !== "ratio"}
             onClick={() => {
               setSelectType("manual");
-              setValue(1);
+              setValue(0);
             }}
           />
           <label
@@ -53,8 +53,8 @@ const ServiceAndTaxation = ({
         </div>
         <input
           className="use-defind-ratio-input"
-          placeholder="500"
-          onChange={(event) => setValue(event.target.value || 1)}
+          // placeholder="500"
+          onChange={(event) => setValue(event.target.value || 0)}
           value={type !== "ratio" ? value : null}
           disabled={type === "ratio"}
         />

@@ -10,19 +10,31 @@ import "../styles/Admin.css";
 
 const Admin = () => {
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState({});
   const getUsers = async () => {
     setLoading(true);
     const userId = localStorage.getItem("userId");
+    const allUserRevenu = await api.get("/api/v1/revenue/allUser");
+    console.log("aaaaaaaaaa", allUserRevenu);
+    const currentUserRevenu = allUserRevenu?.data?.filter(
+      (user) => user.user?._id === userId
+    );
+    console.log("currentUserRevenu", currentUserRevenu);
     const res = await api.get(`/api/v1/user/${userId}`);
+    let userDataDetail = {
+      user: currentUserRevenu[0]?.user,
+      revenue: currentUserRevenu[0]?.revenue,
+    };
+    setUserData(userDataDetail);
+    console.log("res", res);
     setLoading(false);
-    formik.setFieldValue("firstName", res.data.firstName);
-    formik.setFieldValue("lastName", res.data.lastName);
-    formik.setFieldValue("email", res.data.email);
-    formik.setFieldValue("phone", res.data.phone);
-    formik.setFieldValue("password", res.data.password);
+    formik.setFieldValue("firstName", userDataDetail.user.firstName);
+    formik.setFieldValue("lastName", userDataDetail.user.lastName);
+    formik.setFieldValue("email", userDataDetail.user.email);
+    formik.setFieldValue("phone", userDataDetail.user.phone);
+    formik.setFieldValue("password", userDataDetail.user.password);
     setLoading();
   };
-
   useEffect(() => {
     getUsers();
   }, []);
@@ -70,17 +82,23 @@ const Admin = () => {
       <div className="admin-content-wrapper">
         <div className="admin-header">
           <div className="admin-wrapper">
-            <div className="admin-bg-img">
-              {/* <img className="admin-img" src={Admin Image} alt="img"/> */}
-            </div>
+            <img
+              src={`https://ui-avatars.com/api/?name=${userData?.user?.firstName}`}
+              className="admin-profile"
+              alt="Avatar"
+            />
             <div>
-              <div className="admin-name">Joseph Admin</div>
-              <div className="admin-mail">admin@gmail.com</div>
+              <div className="admin-name">
+                {userData && userData?.user?.firstName}
+              </div>
+              <div className="admin-mail">
+                {userData && userData?.user?.email}
+              </div>
             </div>
           </div>
           <TicketsCard
             title="Total Revenue"
-            subTitle="$25k"
+            subTitle={userData?.revenue?.totalRevenue}
             textAlign="center"
             bgColor="#F2F8FB"
             color="var(--blue-color)"
@@ -113,7 +131,7 @@ const Admin = () => {
             {formik.touched.email && formik.errors.email && (
               <div>{formik.errors.email}</div>
             )}
-            <Input
+            {/* <Input
               label="Password"
               name="password"
               type="password"
@@ -124,7 +142,7 @@ const Admin = () => {
             />
             {formik.touched.password && formik.errors.password && (
               <div>{formik.errors.password}</div>
-            )}
+            )} */}
           </div>
           <div className="col-6">
             <Input

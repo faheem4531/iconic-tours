@@ -3,20 +3,7 @@
   align-items: center;
   gap: 15px;
 }
-.user-profile-bg-img {
-  background-image: url(../assets/pngs/admin-bg.png);
-  width: 90px;
-  height: 90px;
-  border-radius: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.user-profile-img {
-  width: 90px;
-  height: 90px;
-  border-radius: 100px;
-}
+
 .user-profile-name {
   font-size: 25px;
   font-weight: 700;
@@ -52,7 +39,7 @@
 .admin-save-button {
   margin-left: auto;
   align-self: flex-end;
-  margin-top: 10rem;
+  margin-top: 7rem;
   width: 170px;
 }
 .sold-tickets-card-wrapper {
