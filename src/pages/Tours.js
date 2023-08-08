@@ -26,9 +26,6 @@ const Tours = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState(null);
-
-  console.log("allCategories", allCategories);
-
   const defaultServices = [
     {
       title: "Ticketing & Handling:",
@@ -74,7 +71,6 @@ const Tours = () => {
     },
     onSubmit: async (data) => {
       setLoading(true);
-      console.log("data", data);
       const upComingValue = data.upComing === "true" ? true : false;
       const payload = {
         ...data,
@@ -84,10 +80,10 @@ const Tours = () => {
         })),
         availableTicket: ticketFor,
       };
-      console.log("ttttttt12", payload);
+      console.log("ttttt", ticketFor);
+      console.log("pppp", payload);
       try {
         console.log("into try");
-        console.log("sssssss");
         if (payload.availableTicket.length === 0)
           throw new Error("Failed to create package");
         console.log("payload", payload);
@@ -127,7 +123,7 @@ const Tours = () => {
       upComing: Yup.boolean().required("Dropdown value is required"),
     }),
   });
-
+  console.log("fffffffff", formik.values);
   const getTours = async () => {
     setLoading(true);
     const res = await api.get("/api/v1/package");
@@ -146,6 +142,7 @@ const Tours = () => {
 
   const getAllCategories = async () => {
     const res = await api.get("/api/v1/category");
+    console.log("dddd");
     setAllCategories(res.data);
   };
 
@@ -159,10 +156,11 @@ const Tours = () => {
     getAllCategories();
     getUsers();
   }, []);
-
   const onEdit = (data) => {
+    console.log("availtickssss", data);
+    setTicketFor(data.availableTicket);
     formik.setFieldValue("name", data.name);
-    formik.setFieldValue("category", data.category.name);
+    formik.setFieldValue("category", data.category._id);
     formik.setFieldValue("user", data.user);
     formik.setFieldValue("startDate", data.startDate);
     formik.setFieldValue("endDate", data.endDate);
@@ -171,6 +169,7 @@ const Tours = () => {
     formik.setFieldValue("totalTickets", data.totalTickets);
     formik.setFieldValue("upComing", data.upComing);
     const btn = document.getElementById("openModalBtn");
+    console.log("openModalBtn", btn);
     btn.click();
   };
 
@@ -239,8 +238,12 @@ const Tours = () => {
         </div>
         <AddNewButton
           loading={loading}
-          title="Add Tour"
-          onClose={() => formik.resetForm()}
+          title={selectedPackageId ? "Update Tour" : "Add Tour"}
+          onClose={() => {
+            setSelectedPackageId(null);
+            formik.resetForm();
+            console.log("pppppppppppss");
+          }}
           onClick={formik.handleSubmit}
           selectedCategoryId={selectedPackageId}>
           <Input
@@ -281,7 +284,6 @@ const Tours = () => {
             value={formik.values.category}
             label="Add To category"
             name="category"
-            placeholder="Select"
             color="var(--dark-orange-color)">
             <option disabled key={"select"} value={""}>
               Select Category

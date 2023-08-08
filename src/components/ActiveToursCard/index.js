@@ -20,8 +20,7 @@ const ActiveToursCard = ({
   getTours,
   id,
 }) => {
-
-  console.log("title", title)
+  console.log("title", title);
   const deleteTours = async () => {
     try {
       await api.delete(`/api/v1/package/${id}`);

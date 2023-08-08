@@ -83,7 +83,7 @@ const Categories = () => {
       <Header title="Categories" />
       <div className="category-modal-btn--wrapper">
         <AddNewButton
-          title="Add New Category"
+          title={selectedCategoryId ? "Update Category" : "Add New Category"}
           loading={loading}
           onClick={formik.handleSubmit}
           onClose={onClose}
