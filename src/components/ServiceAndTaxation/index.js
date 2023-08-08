@@ -32,7 +32,7 @@ const ServiceAndTaxation = ({
           className="use-defind-ratio-input"
           placeholder="5%"
           onChange={(event) => setValue(event.target.value || 0)}
-          value={type !== "ratio" ? null : value}
+          value={type !== "ratio" ? null : parseInt(value)}
           disabled={type !== "ratio"}
         />
         <div class="form-check">
@@ -55,7 +55,7 @@ const ServiceAndTaxation = ({
           className="use-defind-ratio-input"
           // placeholder="500"
           onChange={(event) => setValue(event.target.value || 0)}
-          value={type !== "ratio" ? value : null}
+          value={type !== "ratio" ? parseInt(value) : null}
           disabled={type === "ratio"}
         />
       </div>

@@ -76,14 +76,11 @@ const Tours = () => {
         ...data,
         upComing: upComingValue,
         taxation: services.map((service) => ({
-          [service.name]: service.value,
+          [service.name]: Number(service.value),
         })),
         availableTicket: ticketFor,
       };
-      console.log("ttttt", ticketFor);
-      console.log("pppp", payload);
       try {
-        console.log("into try");
         if (payload.availableTicket.length === 0)
           throw new Error("Failed to create package");
         console.log("payload", payload);
