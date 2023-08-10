@@ -126,10 +126,10 @@ const Tours = () => {
     const res = await api.get("/api/v1/package");
     setLoading(false);
     setTours(res.data);
-    const activeTours = res.data.filter((tour) => {
+    const activeTours = res?.data?.filter((tour) => {
       return tour.upComing === false;
     });
-    const upComingTours = res.data.filter((tour) => {
+    const upComingTours = res?.data?.filter((tour) => {
       return tour.upComing === true;
     });
 
@@ -247,7 +247,7 @@ const Tours = () => {
             placeholder="Downtown"
             label="Tour Name"
             name="name"
-            value={formik.values.name}
+            value={formik?.values?.name}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             color="var(--dark-orange-color)"
@@ -259,7 +259,7 @@ const Tours = () => {
             top="0px"
             type="text"
           />
-          {formik.touched.name && formik.errors.name && (
+          {formik.touched.name && formik.errors?.name && (
             <div className="error-message">{formik.errors.name}</div>
           )}
           <SelectInput
@@ -532,19 +532,19 @@ const Tours = () => {
       </div>
       {!loading ? (
         <div className="active-tours-wrap-container">
-          {activeTours.length !== 0 ? (
+          {activeTours?.length !== 0 ? (
             activeTours?.map((card, index) => (
               <ActiveToursCard
                 onEdit={onEdit}
                 key={index}
-                title={card.category.name}
-                subTitle={card.name}
-                time={card.startTime}
-                date={card.startDate}
-                totalTickets={card.totalTickets}
+                title={card?.category?.name}
+                subTitle={card?.name}
+                time={card?.startTime}
+                date={card?.startDate}
+                totalTickets={card?.totalTickets}
                 remainingTickets={card.remainingTickets}
                 setSelectedPackageId={setSelectedPackageId}
-                bgColor={card.category.color}
+                bgColor={card?.category?.color}
                 card={card}
                 id={card._id}
                 getTours={getTours}
