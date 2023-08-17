@@ -15,7 +15,6 @@ const Admin = () => {
     setLoading(true);
     const userId = localStorage.getItem("userId");
     const allUserRevenu = await api.get("/api/v1/revenue/allUser");
-    console.log("aaaaaaaaaa", allUserRevenu);
     const currentUserRevenu = allUserRevenu?.data?.filter(
       (user) => user.user?._id === userId
     );
@@ -26,7 +25,6 @@ const Admin = () => {
       revenue: currentUserRevenu[0]?.revenue,
     };
     setUserData(userDataDetail);
-    console.log("res", res);
     setLoading(false);
     formik.setFieldValue("firstName", userDataDetail.user.firstName);
     formik.setFieldValue("lastName", userDataDetail.user.lastName);
