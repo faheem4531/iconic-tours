@@ -18,6 +18,7 @@ const Input = ({
   handleChange,
   handleBlur,
   value,
+  minValue=0
 }) => {
   return (
     <div>
@@ -43,6 +44,7 @@ const Input = ({
         }}
         placeholder={placeholder}
         type={type}
+        min={minValue}
       />
     </div>
   );

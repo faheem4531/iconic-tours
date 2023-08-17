@@ -64,8 +64,9 @@ const Tours = () => {
       // startDate: new Date().toISOString().split("T")[0],
       endDate: moment(new Date()).format("YYYY MM DD"),
       // endDate: new Date().toISOString().split("T")[0],
-      startTime: "12:00",
-      endTime: "12:00",
+      // startTime: "12:00",
+      // endTime: "12:00",
+      validHours: 1,
       upComing: false,
       totalTickets: 0,
     },
@@ -114,8 +115,9 @@ const Tours = () => {
         .required("At least one user is required"),
       startDate: Yup.string().required("Start date is required"),
       endDate: Yup.string().required("End date is required"),
-      startTime: Yup.string().required("Start time is required"),
-      endTime: Yup.string().required("End time is required"),
+      // startTime: Yup.string().required("Start time is required"),
+      // endTime: Yup.string().required("End time is required"),
+      validHours: Yup.string().required("Validity hours is required"),
       totalTickets: Yup.string().required("Total tickets are required"),
       upComing: Yup.boolean().required("Dropdown value is required"),
     }),
@@ -161,8 +163,9 @@ const Tours = () => {
     formik.setFieldValue("user", data.user);
     formik.setFieldValue("startDate", data.startDate);
     formik.setFieldValue("endDate", data.endDate);
-    formik.setFieldValue("startTime", data.startTime);
-    formik.setFieldValue("endTime", data.endTime);
+    // formik.setFieldValue("startTime", data.startTime);
+    // formik.setFieldValue("endTime", data.endTime);
+    formik.setFieldValue("validHours", data.validHours);
     formik.setFieldValue("totalTickets", data.totalTickets);
     formik.setFieldValue("upComing", data.upComing);
     const btn = document.getElementById("openModalBtn");
@@ -329,7 +332,7 @@ const Tours = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-6">
+            {/* <div className="col-6">
               <Input
                 placeholder="17:00"
                 label="Start Time"
@@ -361,6 +364,20 @@ const Tours = () => {
                 radius="6px"
                 border="1px solid var(--bs-border-color)"
                 type="time"
+              />
+            </div> */}
+            <div className="col-12">
+              <Input 
+                label="Validity Hours"
+                name="validHours"
+                type="number" 
+                labelSize="13px"
+                size="14px"
+                value={formik.values.validHours}
+                handleChange={formik.handleChange}
+                height="38px"
+                radius="6px"
+                minValue={1}
               />
             </div>
           </div>
