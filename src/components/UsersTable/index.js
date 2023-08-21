@@ -61,6 +61,17 @@ const UsersTable = ({ users, loading }) => {
                           }}>
                           User Profile
                         </button>
+                        <button
+                          class="dropdown-item"
+                          onClick={() => {
+                            navigate("/revenueReport", {
+                              state: {
+                                data: data,
+                              },
+                            });
+                          }}>
+                          Revenue Report
+                        </button>
                       </ul>
                     </div>
                   </td>

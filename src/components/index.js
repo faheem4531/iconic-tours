@@ -17,6 +17,7 @@ import ProtectRoute from "./ProtectRoute";
 import Loader from "./Loader";
 import ServiceAndTaxation from "./ServiceAndTaxation";
 import MultiSelect from "./MultiSelect";
+import RevenueTable from "./RevenueTable";
 
 export {
   Sidebar,
@@ -38,4 +39,5 @@ export {
   Loader,
   ServiceAndTaxation,
   MultiSelect,
+  RevenueTable
 };

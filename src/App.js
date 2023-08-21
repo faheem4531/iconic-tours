@@ -9,6 +9,7 @@ import {
   Admin,
   UserProfile,
   Users,
+  RevenueReport
 } from "./pages";
 import "./App.css";
 import Layout from "./layout/Layout";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" index element={<Login />} />
           <Route path="/users" index element={<Users />} />
+          <Route path="/revenueReport" index element={<RevenueReport />} />
           <Route path="/categories" index element={<Categories />} />
           <Route path="/tours" index element={<Tours />} />
           <Route path="/admin" index element={<Admin />} />
