@@ -1,0 +1,42 @@
+.user-profile-name {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 34px;
+  letter-spacing: 0px;
+  text-align: left;
+  font-family: var(--main-font);
+  color: var(--dark-black-color);
+}
+
+.user-profile-mail {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  font-family: var(--main-font);
+  color: var(--dark-black-color);
+}
+
+.user-profile-revenue {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  font-family: var(--main-font);
+  color: var(--dark-black-color);
+}
+
+.user-profile-revenue>span {
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.profile-wraper-data>div {
+  margin-bottom: 10px;
+}
+
+.user-revenue-detail-div {
+  margin-top: 20px;
+}

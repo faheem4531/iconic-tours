@@ -25,18 +25,18 @@ const UsersTable = ({ users, loading }) => {
             </th>
           </tr>
           <tbody>
-            {users.map((data, index) => (
+            {users?.map((data, index) => (
               <React.Fragment key={index}>
                 <tr>
                   <td className="users-table-num">{index + 1}</td>
-                  <td className="users-table-name">{data.user.firstName}</td>
-                  <td className="users-table-email">{data.user.email}</td>
+                  <td className="users-table-name">{data?.user?.firstName}</td>
+                  <td className="users-table-email">{data?.user?.email}</td>
                   <td className="users-table-revenue">
-                    {`$${data.revenue.totalRevenue}`}
+                    {`$${data?.revenue?.totalRevenue}`}
                   </td>
-                  <td className="users-table-email">{data.user.phone}</td>
+                  <td className="users-table-email">{data?.user?.phone}</td>
                   <td className="users-table-tickets">
-                    {data.revenue.totalTickets}
+                    {data?.revenue?.totalTickets}
                   </td>
                   <td>
                     <div class="dropdown">
