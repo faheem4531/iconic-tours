@@ -39,6 +39,7 @@ const UserProfile = () => {
       firstName: state.data.user.firstName || "",
       lastName: state.data.user.lastName || "",
       email: state.data.user.email || "",
+      location: state.data.user.location || "",
       phone: state.data.user.phone || "",
       password: state.data.user.password || "",
     },
@@ -48,6 +49,8 @@ const UserProfile = () => {
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
+      location: Yup.string()
+        .required("Location is required"),
       phone: Yup.string().required("Phone Number is required"),
       password: Yup.string().required("Password is required"),
     }),
@@ -127,7 +130,7 @@ const UserProfile = () => {
             )}
             <Input
               label="Email"
-              type="eamil"
+              type="email"
               placeholder="Name"
               name="email"
               value={formik.values.email}
@@ -136,6 +139,18 @@ const UserProfile = () => {
             />
             {formik.touched.email && formik.errors.email && (
               <div>{formik.errors.email}</div>
+            )}
+            <Input
+              label="Location"
+              type="text"
+              placeholder="Location"
+              name="location"
+              value={formik?.values?.location}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+            />
+            {formik.touched.location && formik.errors.location && (
+              <div>{formik.errors.location}</div>
             )}
             {/* <Input
               label="Password"
