@@ -14,3 +14,7 @@
   color: var(--black-colors);
   font-family: var(--main-font);
 }
+
+.error-message {
+  color: red;
+}

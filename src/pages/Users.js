@@ -95,7 +95,7 @@ const Users = () => {
             handleChange={formik.handleChange}
           />
           {formik.touched.firstName && formik.errors.firstName && (
-            <div>{formik.errors.firstName}</div>
+            <div className="error-message">{formik.errors.firstName}</div>
           )}
           <Input
             placeholder="Last Name"
@@ -113,7 +113,7 @@ const Users = () => {
             handleChange={formik.handleChange}
           />
           {formik.touched.lastName && formik.errors.lastName && (
-            <div>{formik.errors.lastName}</div>
+            <div className="error-message">{formik.errors.lastName}</div>
           )}
           <Input
             placeholder="example01@example.com"
@@ -131,7 +131,7 @@ const Users = () => {
             handleChange={formik.handleChange}
           />
           {formik.touched.email && formik.errors.email && (
-            <div>{formik.errors.email}</div>
+            <div className="error-message">{formik.errors.email}</div>
           )}
           <Input
             placeholder=""
@@ -167,7 +167,7 @@ const Users = () => {
             handleChange={formik.handleChange}
           />
           {formik.touched.phone && formik.errors.phone && (
-            <div>{formik.errors.phone}</div>
+            <div className="error-message">{formik.errors.phone}</div>
           )}
           <Input
             placeholder="Password@123"
@@ -185,7 +185,7 @@ const Users = () => {
             handleChange={formik.handleChange}
           />
           {formik.touched.password && formik.errors.password && (
-            <div>{formik.errors.password}</div>
+            <div className="error-message">{formik.errors.password}</div>
           )}
           <Input
             placeholder="Password@123"
@@ -203,7 +203,7 @@ const Users = () => {
             handleChange={formik.handleChange}
           />
           {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-            <div>{formik.errors.confirmPassword}</div>
+            <div className="error-message">{formik.errors.confirmPassword}</div>
           )}
         </AddNewButton>
       </div>
