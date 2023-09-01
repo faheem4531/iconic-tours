@@ -31,6 +31,7 @@ const Users = () => {
       phone: "",
       password: "",
       confirmPassword: "",
+      location: ""
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("First Name is required"),
@@ -38,6 +39,8 @@ const Users = () => {
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
+      location: Yup.string()
+        .required("Location is required"),
       phone: Yup.string().required("Phone Number is required"),
       password: Yup.string().required("Password is required"),
       confirmPassword: Yup.string()
@@ -129,6 +132,24 @@ const Users = () => {
           />
           {formik.touched.email && formik.errors.email && (
             <div>{formik.errors.email}</div>
+          )}
+          <Input
+            placeholder=""
+            label="Location"
+            name="email"
+            color="var(--blue-color)"
+            size="14px"
+            labelSize="13px"
+            height="38px"
+            radius="6px"
+            border="1px solid var(--bs-border-color)"
+            type="location"
+            fontSize="14px"
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+          />
+          {formik.touched.location && formik.errors.location && (
+            <div>{formik.errors.location}</div>
           )}
           <Input
             placeholder="00 000 000"

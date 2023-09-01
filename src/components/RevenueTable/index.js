@@ -12,6 +12,7 @@ const RevenueTable = ({ tours, loading }) => {
             <th>No.</th>
             <th>Tour Name</th>
             <th>Total Price</th>
+            <th>Total Tax</th>
             <th>Tickets Sold</th>
           </tr>
           <tbody>
@@ -19,9 +20,10 @@ const RevenueTable = ({ tours, loading }) => {
               <React.Fragment >
                 <tr>
                   <td className="users-table-num">{index + 1}</td>
-                  <td className="users-table-name">{data.packageName}</td>
-                  <td className="users-table-revenue">$ {data.revenue.totalTicketsPrice}</td>
-                  <td className="users-table-tickets">{data.revenue.totalTickets}</td>
+                  <td className="users-table-name">{data?.packageName}</td>
+                  <td className="users-table-revenue">$ {data?.revenue?.totalTicketsPrice}</td>
+                  <td className="users-table-revenue">$ {data?.revenue?.totalTaxPrice}</td>
+                  <td className="users-table-tickets">{data?.revenue?.totalTickets}</td>
                 </tr>
                 <div className="spacer" />
               </React.Fragment>
