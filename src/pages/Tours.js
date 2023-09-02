@@ -82,8 +82,11 @@ const Tours = () => {
         availableTicket: ticketFor,
       };
       try {
+        ticketFor.forEach((ticket)=>{
+          if(!ticket.discount) throw new Error("Discount should not be empty")
+        })
         if (payload.availableTicket.length === 0)
-          throw new Error("Failed to create package");
+          throw new Error(" Tickets Available For, should not be empty");
         console.log("payload", payload);
         selectedPackageId
           ? await api.put(`/api/v1/package/${selectedPackageId}`, payload)
@@ -102,7 +105,8 @@ const Tours = () => {
         setServices(defaultServices);
       } catch (error) {
         setLoading(false);
-        toast(error?.response?.data?.message || "Failed to create package", {
+        // setTicketFor([]);
+        toast(error?.response?.data?.message || error.message || "Failed to create package", {
           type: "error",
         });
       }
@@ -242,6 +246,7 @@ const Tours = () => {
           onClose={() => {
             setSelectedPackageId(null);
             formik.resetForm();
+            setTicketFor([])
             console.log("pppppppppppss");
           }}
           onClick={formik.handleSubmit}
