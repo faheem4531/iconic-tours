@@ -136,14 +136,14 @@ const Users = () => {
           <Input
             placeholder=""
             label="Location"
-            name="email"
+            name="location"
             color="var(--blue-color)"
             size="14px"
             labelSize="13px"
             height="38px"
             radius="6px"
             border="1px solid var(--bs-border-color)"
-            type="location"
+            type="text"
             fontSize="14px"
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
