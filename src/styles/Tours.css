@@ -4,6 +4,7 @@
   justify-content: space-between;
   padding: 0px 20px;
 }
+
 .active-tours-wrap-container {
   display: flex;
   align-items: center;
@@ -11,9 +12,11 @@
   overflow-x: scroll;
   margin: 20px 20px;
 }
+
 .active-tours-wrap-container::-webkit-scrollbar {
   height: 0px;
 }
+
 .num-of-active-tours {
   font-size: 16px;
   font-weight: 700;
@@ -23,18 +26,22 @@
   font-family: var(--main-font);
   color: var(--black-colors);
 }
+
 .tours-horizontal-border {
   border-bottom: 1px solid var(--light-sky-color);
   margin: 0px 20px;
 }
+
 .upcoming-tours {
   margin: 20px 20px;
 }
+
 .all-tousr-loader-wrapper {
   text-align: center;
   margin: 30px 0px;
   width: 100%;
 }
+
 .all-tours-error-message {
   font-size: 16px;
   font-weight: 600;
@@ -46,15 +53,18 @@
   text-align: center;
   margin-top: 10vh;
 }
+
 .available-ticket-com {
   position: relative;
 }
+
 .close-icon-tours {
   position: absolute;
   right: 22px;
   top: 14px;
   cursor: pointer;
 }
+
 .tours-collapse {
   display: flex;
   align-items: center;
@@ -62,10 +72,12 @@
   margin-top: 18px;
   margin-bottom: 5px;
 }
+
 .dropdown-arrow {
   transform: rotate(180deg);
   margin-right: 5px;
 }
+
 .services-and-taxation {
   font-size: 13px;
   font-weight: 700;
@@ -83,9 +95,10 @@
   color: var(--light-black-color);
   font-family: var(--main-font);
 }
+
 .use-defind-ratio-input {
   outline: none;
-  width: 25px;
+  width: 150px;
   height: 20px;
   border-radius: 3px;
   border: 1px solid var(--light-gray-color);
@@ -99,6 +112,7 @@
   color: var(--light-black-color);
   padding: 2px;
 }
+
 .text-and-handling-title {
   font-family: var(--main-font);
   font-size: 14px;
@@ -109,15 +123,18 @@
   color: var(--light-black-color);
   margin-bottom: 10px;
 }
+
 .tax-and-services-content-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 90%;
 }
+
 .margin-wrapper {
   margin-bottom: 25px;
 }
+
 .error-message {
   color: red;
 }

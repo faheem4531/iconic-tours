@@ -1,0 +1,8 @@
+.use-define-wraper {
+  display: flex;
+  align-items: center;
+}
+
+.use-define-wraper input {
+  margin-left: 100px;
+}

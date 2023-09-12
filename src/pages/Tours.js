@@ -26,6 +26,8 @@ const Tours = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState(null);
+  const [taxationType, setTaxationType] = useState("MANUAL");
+  // console.log(taxationType, "taxation type");
   const defaultServices = [
     {
       title: "Ticketing & Handling:",
@@ -80,10 +82,12 @@ const Tours = () => {
           [service.name]: Number(service.value),
         })),
         availableTicket: ticketFor,
+        taxType: taxationType
       };
       try {
-        ticketFor.forEach((ticket)=>{
-          if(!ticket.discount) throw new Error("Discount should not be empty")
+        console.log("payloaaaaaaaad", data)
+        ticketFor.forEach((ticket) => {
+          if (!ticket.discount) throw new Error("Discount should not be empty")
         })
         if (payload.availableTicket.length === 0)
           throw new Error(" Tickets Available For, should not be empty");
@@ -126,7 +130,7 @@ const Tours = () => {
       upComing: Yup.boolean().required("Dropdown value is required"),
     }),
   });
-  console.log("fffffffff", formik.values);
+  // console.log("fffffffff", formik.values);
   const getTours = async () => {
     setLoading(true);
     const res = await api.get("/api/v1/package");
@@ -247,7 +251,7 @@ const Tours = () => {
             setSelectedPackageId(null);
             formik.resetForm();
             setTicketFor([])
-            console.log("pppppppppppss");
+            // console.log("pppppppppppss");
           }}
           onClick={formik.handleSubmit}
           selectedCategoryId={selectedPackageId}>
@@ -372,10 +376,10 @@ const Tours = () => {
               />
             </div> */}
             <div className="col-12">
-              <Input 
+              <Input
                 label="Validity Hours"
                 name="validHours"
-                type="number" 
+                type="number"
                 labelSize="13px"
                 size="14px"
                 value={formik.values.validHours}
@@ -474,22 +478,31 @@ const Tours = () => {
                 aria-expanded="false"
                 aria-controls="collapseExample">
                 <div className="services-and-taxation">
-                  Services & Taxation{" "}
-                  <span style={{ color: "#EC3237" }}>*</span>
+                  {/* Services & Taxation{" "}
+                  <span style={{ color: "#EC3237" }}>*</span> */}
+                  <SelectInput
+                    handleChange={(event) => {
+                      // console.log('tax', event.target.value);
+                      setTaxationType(event.target.value);
+                    }}
+                    label="Services & Taxation"
+                    color="var(--dark-orange-color)">
+                    <option value="MANUAL" selected>
+                      Manual
+                    </option>
+                    <option value="RATIO">Ratio</option>
+                  </SelectInput>
                 </div>
-                <img
-                  className="dropdown-arrow"
-                  src={dropdownArrow}
-                  alt="icon"
-                />
               </div>
 
+              {/* {console.log(services, "arraydata")} */}
               <div class="collapse" id="collapseExample">
                 <div class="card card-body">
                   <ServiceAndTaxation
                     title={services[0].title}
                     type={services[0].type}
                     value={services[0].value}
+                    selectedType={taxationType}
                     setSelectType={(type) => {
                       const deepCopy = [...services];
                       deepCopy[0].type = type;
@@ -505,6 +518,7 @@ const Tours = () => {
                     title={services[1].title}
                     type={services[1].type}
                     value={services[1].value}
+                    selectedType={taxationType}
                     setSelectType={(type) => {
                       const deepCopy = [...services];
                       deepCopy[1].type = type;
@@ -520,6 +534,7 @@ const Tours = () => {
                     title={services[2].title}
                     type={services[2].type}
                     value={services[2].value}
+                    selectedType={taxationType}
                     setSelectType={(type) => {
                       const deepCopy = [...services];
                       deepCopy[2].type = type;
@@ -535,6 +550,7 @@ const Tours = () => {
                     title={services[3].title}
                     type={services[3].type}
                     value={services[3].value}
+                    selectedType={taxationType}
                     setSelectType={(type) => {
                       const deepCopy = [...services];
                       deepCopy[3].type = type;

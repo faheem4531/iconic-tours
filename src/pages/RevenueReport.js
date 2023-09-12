@@ -61,13 +61,13 @@ const RevenueReport = () => {
           </div>
           <div className="user-revenue-detail-div">
             <div className="user-profile-revenue ">Total Revenue :
-              <span>{state?.data?.revenue?.totalRevenue}</span>
+              <span>$ {state?.data?.revenue?.totalRevenue}</span>
             </div>
             <div className="user-profile-revenue">Tickets Sold :
               <span>{state.data.revenue?.totalTickets}</span>
             </div>
             <div className="user-profile-revenue">Total Tax :
-              <span>{state.data.revenue.totalTaxPrice}</span>
+              <span>$ {state.data.revenue.totalTaxPrice}</span>
             </div>
           </div>
         </div>
